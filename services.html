@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — ECOMMDOTS Amazon Growth Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS RESET & VARIABLES (LIGHT MODE — IDENTICAL TO HOMEPAGE)
+============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:      #FAFAFA;
+  --black-2:    #F1F3F5;
+  --card:       #FFFFFF;
+  --card-2:     #F8F9FA;
+  --border:     #E5E7EB;
+  --border-2:   #D1D5DB;
+  --white:      #0A0A0A;
+  --red:        #D9232D;
+  --red-dark:   #A81820;
+  --red-light:  #FF3A45;
+  --red-glow:   rgba(217,35,45,0.08);
+  --gray-100:   #111111;
+  --gray-400:   #4B5563;
+  --gray-500:   #6B7280;
+  --gray-600:   #9CA3AF;
+  --gray-800:   #F3F4F6;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-x: hidden;
+  cursor: none;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+/* NOISE OVERLAY */
+body::after {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.6; mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   CURSOR
+============================================================ */
+.cursor {
+  position: fixed; width: 12px; height: 12px;
+  background: var(--red); border-radius: 50%;
+  pointer-events: none; z-index: 99999;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform: translate(-50%, -50%);
+}
+.cursor-follower {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(217,35,45,0.4); border-radius: 50%;
+  pointer-events: none; z-index: 99998;
+  transition: transform 0.35s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+body:has(a:hover) .cursor,
+body:has(button:hover) .cursor { transform: translate(-50%, -50%) scale(1.5); }
+body:has(a:hover) .cursor-follower,
+body:has(button:hover) .cursor-follower { width: 56px; height: 56px; opacity: 0.5; }
+
+
+/* ============================================================
+   PREMIUM BOTTOM BACK BUTTON
+============================================================ */
+.back-home-wrapper {
+  background: var(--black);
+  padding: 60px 60px 20px; 
+  display: flex;
+  justify-content: center;
+}
+
+.btn-premium-back {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 24px; 
+  background: var(--card); 
+  border: 1px solid var(--border); 
+  padding: 20px 40px; 
+  color: var(--white); 
+  font-family: 'JetBrains Mono', monospace; 
+  font-size: 11px; 
+  font-weight: 600;
+  letter-spacing: 0.15em; 
+  text-transform: uppercase; 
+  text-decoration: none; 
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  position: relative; 
+  overflow: hidden;
+}
+
+.btn-premium-back:hover {
+  border-color: var(--red); 
+  background: var(--black-2); 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(217,35,45,0.1);
+}
+
+.btn-premium-back .arrow-back {
+  position: relative; 
+  z-index: 2; 
+  color: var(--red); 
+  font-size: 16px; 
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-premium-back:hover .arrow-back {
+  transform: translateX(-8px);
+}
+
+.btn-premium-back .btn-text {
+  position: relative; 
+  z-index: 2;
+}
+
+.btn-premium-back .line-back {
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  height: 2px; 
+  background: var(--red); 
+  transform: scaleX(0); 
+  transform-origin: right; /* Animates right-to-left to match the back arrow */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  z-index: 1;
+}
+
+.btn-premium-back:hover .line-back {
+  transform: scaleX(1); 
+}
+
+.btn-premium-back .glow-back {
+  position: absolute; 
+  top: 0; left: 0; right: 0; bottom: 0; 
+  background: radial-gradient(circle at center, rgba(217,35,45,0.06) 0%, transparent 80%); 
+  opacity: 0; 
+  transition: opacity 0.4s ease; 
+  z-index: 0; 
+  pointer-events: none;
+}
+
+.btn-premium-back:hover .glow-back {
+  opacity: 1;
+}
+
+/* ============================================================
+   LOADER
+============================================================ */
+.loader {
+  position: fixed; inset: 0; background: var(--black); z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 24px; transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.1em; color: var(--white); }
+.loader-logo span { color: var(--red); }
+.loader-bar { width: 200px; height: 2px; background: var(--border); position: relative; overflow: hidden; }
+.loader-progress { position: absolute; inset: 0; background: var(--red); transform: translateX(-100%); animation: loadProgress 1.2s ease forwards; }
+@keyframes loadProgress { to { transform: translateX(0); } }
+
+/* ============================================================
+   NAVIGATION (IDENTICAL TO HOMEPAGE)
+============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 60px; height: 72px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(250,250,250,0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent; transition: var(--transition);
+}
+.nav.scrolled { border-bottom-color: var(--border); background: rgba(250,250,250,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); transition: var(--transition); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--red); transition: width 0.3s ease; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--red); }
+.nav-links a.active::after { width: 100%; }
+.nav-cta { background: var(--red); color: #fff !important; padding: 10px 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); position: relative; overflow: hidden; }
+.nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--red-dark); transform: translateX(-101%); transition: transform 0.3s ease; }
+.nav-cta:hover::before { transform: translateX(0); }
+.nav-cta span { position: relative; z-index: 1; }
+.nav-cta::after { display: none; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+.mobile-menu { position: fixed; inset: 0; background: var(--black); z-index: 999; padding: 100px 40px 40px; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; gap: 24px; }
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 700; text-transform: uppercase; color: var(--white); letter-spacing: 0.04em; border-bottom: 1px solid var(--border); padding-bottom: 24px; transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--red); }
+
+/* ============================================================
+   SCROLL TO TOP
+============================================================ */
+.scroll-top {
+  position: fixed; bottom: 32px; right: 32px; width: 44px; height: 44px;
+  background: var(--red); color: #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 16px; cursor: pointer;
+  z-index: 100; opacity: 0; transform: translateY(16px);
+  transition: var(--transition); border: none;
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); }
+.scroll-top:hover { background: var(--red-dark); }
+
+/* ============================================================
+   BUTTONS (IDENTICAL TO HOMEPAGE)
+============================================================ */
+.btn-primary {
+  background: var(--red); color: #fff;
+  padding: 14px 28px; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: var(--transition); position: relative; overflow: hidden;
+}
+.btn-primary::before { content: ''; position: absolute; inset: 0; background: var(--red-dark); transform: translateX(-101%); transition: transform 0.3s ease; }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-outline {
+  background: transparent; color: var(--white); padding: 14px 28px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid var(--border-2); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 10px; transition: var(--transition);
+}
+.btn-outline:hover { border-color: var(--red); color: var(--red); }
+.btn-white { background: #fff; color: var(--red); padding: 15px 30px; font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: var(--transition); white-space: nowrap; }
+.btn-white:hover { background: var(--black); color: #fff; }
+.btn-white-outline { background: var(--red); color: #fff; padding: 15px 30px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.4); cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: var(--transition); white-space: nowrap; }
+.btn-white-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ============================================================
+   SCROLL ANIMATIONS
+============================================================ */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.94); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; } .d5 { transition-delay: 0.5s; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+@keyframes rotateSlow { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+@keyframes shimmer { 0%{background-position:200% center;} 100%{background-position:-200% center;} }
+@keyframes floatY { 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-10px);} }
+@keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================================
+   SECTION COMMONS
+============================================================ */
+.section-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em;
+  color: var(--red); text-transform: uppercase; display: flex; align-items: center;
+  gap: 12px; margin-bottom: 16px;
+}
+.section-tag::before { content: ''; width: 20px; height: 1px; background: var(--red); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 5vw, 80px);
+  letter-spacing: 0.02em; line-height: 0.92; color: var(--white); margin-bottom: 20px;
+}
+.section-title span { color: var(--red); }
+.section-sub { font-size: 16px; font-weight: 300; color: var(--gray-400); max-width: 580px; line-height: 1.75; }
+
+/* ============================================================
+   HERO — SERVICES PAGE
+============================================================ */
+.services-hero {
+  min-height: 100vh;
+  padding: 140px 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* Dramatic background geometry */
+.hero-geometry {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.hero-geo-line {
+  position: absolute; background: linear-gradient(90deg, transparent, rgba(217,35,45,0.06), transparent);
+  height: 1px; width: 120%; left: -10%;
+}
+.hero-geo-line:nth-child(1) { top: 25%; transform: rotate(-3deg); }
+.hero-geo-line:nth-child(2) { top: 50%; transform: rotate(-3deg); background: linear-gradient(90deg, transparent, rgba(217,35,45,0.04), transparent); }
+.hero-geo-line:nth-child(3) { top: 75%; transform: rotate(-3deg); }
+
+.hero-geo-circle {
+  position: absolute; border-radius: 50%; border: 1px solid;
+}
+.hero-geo-circle:nth-child(4) { width: 600px; height: 600px; top: -200px; right: -200px; border-color: rgba(217,35,45,0.05); animation: rotateSlow 80s linear infinite; }
+.hero-geo-circle:nth-child(5) { width: 400px; height: 400px; top: -100px; right: -100px; border-color: rgba(217,35,45,0.08); animation: rotateSlow 50s linear infinite reverse; }
+
+.hero-overline {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.3em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-overline::before { content: ''; width: 32px; height: 1px; background: var(--red); }
+
+.services-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 6.5vw, 108px);
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+  color: var(--white);
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+}
+.services-hero h1 .red { color: var(--red); }
+.services-hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--white);
+  color: transparent;
+}
+
+.hero-sub-text {
+  font-size: 16px; font-weight: 400; color: var(--gray-400); max-width: 500px;
+  margin-bottom: 40px; line-height: 1.8;
+  opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.hero-cta-row {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+}
+
+/* PILLAR NAV PILLS */
+.pillar-nav {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 48px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+}
+.pillar-pill {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px;
+  border: 1px solid var(--border-2); color: var(--gray-500);
+  transition: var(--transition); cursor: pointer;
+}
+.pillar-pill:hover, .pillar-pill.active {
+  background: var(--red); color: #fff; border-color: var(--red);
+}
+
+/* HERO RIGHT — Services 4-quadrant Bento */
+.hero-bento {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.55s forwards;
+}
+.hero-bento-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 28px 24px; position: relative; overflow: hidden;
+  transition: var(--transition); cursor: default;
+}
+.hero-bento-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--red);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.hero-bento-card:hover::before { transform: scaleX(1); }
+.hero-bento-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+.bento-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--red); letter-spacing: 0.2em; margin-bottom: 16px; font-weight: 600;
+}
+.bento-icon { margin-bottom: 12px; }
+.bento-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 8px; line-height: 1.15;
+  letter-spacing: 0.03em;
+}
+.bento-desc { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+.bento-bg-num {
+  position: absolute; bottom: -10px; right: 8px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 100px;
+  color: rgba(0,0,0,0.025); line-height: 1; user-select: none; pointer-events: none;
+}
+
+/* ============================================================
+   PILLAR BREADCRUMB / STICKY SIDEBAR SYSTEM
+============================================================ */
+.pillars-index {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  position: sticky; top: 72px; z-index: 100;
+}
+.pillars-index-inner {
+  display: flex; align-items: stretch; gap: 0; overflow-x: auto;
+}
+.pillar-index-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 32px; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gray-500); border-bottom: 2px solid transparent;
+  transition: var(--transition); cursor: pointer; white-space: nowrap;
+  text-decoration: none;
+}
+.pillar-index-item:hover { color: var(--red); border-bottom-color: rgba(217,35,45,0.3); }
+.pillar-index-item.active { color: var(--red); border-bottom-color: var(--red); }
+.pillar-index-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+}
+
+/* ============================================================
+   PILLAR SECTION — SHARED WRAPPER
+============================================================ */
+.pillar-section {
+  padding: 110px 60px;
+  position: relative; overflow: hidden;
+}
+.pillar-section:nth-child(even) { background: var(--black-2); }
+.pillar-section:nth-child(odd) { background: var(--black); }
+
+.pillar-header {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 48px; align-items: flex-start; margin-bottom: 80px;
+}
+.pillar-number-large {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(100px, 12vw, 180px);
+  color: rgba(0,0,0,0.04); line-height: 0.85; user-select: none; min-width: 140px;
+}
+.pillar-header-right {}
+.pillar-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em;
+  color: var(--red); text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.pillar-label::before { content: ''; width: 20px; height: 1px; background: var(--red); }
+.pillar-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 5.5vw, 88px);
+  letter-spacing: 0.02em; line-height: 0.9; color: var(--white); margin-bottom: 20px;
+}
+.pillar-title span { color: var(--red); }
+.pillar-desc { font-size: 16px; color: var(--gray-400); max-width: 640px; line-height: 1.8; }
+
+/* ============================================================
+   SUB-SERVICE CARD SYSTEM — 3 LAYOUTS (ALTERNATING)
+============================================================ */
+
+/* Layout A: Left image, right content */
+.sub-service-A {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px;
+}
+.sub-service-A .ssa-image {
+  height: 480px; position: relative; overflow: hidden;
+}
+.sub-service-A .ssa-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.5s ease;
+}
+.sub-service-A:hover .ssa-image img { transform: scale(1.04); filter: grayscale(0%) contrast(1.1); }
+.sub-service-A .ssa-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(217,35,45,0.1) 0%, transparent 60%);
+}
+.sub-service-A .ssa-image-tag {
+  position: absolute; bottom: 24px; left: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: #fff;
+  background: var(--red); padding: 6px 12px;
+}
+.sub-service-A .ssa-content {
+  background: var(--card); padding: 60px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  border: 1px solid var(--border);
+}
+.sub-service-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--red); letter-spacing: 0.25em; margin-bottom: 20px; font-weight: 600;
+}
+.sub-service-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 3.5vw, 52px);
+  color: var(--white); line-height: 0.92; margin-bottom: 12px; letter-spacing: 0.02em;
+}
+.sub-service-angle {
+  font-size: 13px; color: var(--red); font-style: italic; margin-bottom: 24px;
+}
+.sub-service-body {
+  font-size: 14px; color: var(--gray-400); line-height: 1.8; margin-bottom: 32px;
+}
+.sub-service-metrics {
+  display: flex; gap: 24px; margin-bottom: 36px; padding: 20px;
+  background: var(--black); border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.ssm-item {}
+.ssm-val {
+  font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--white); line-height: 1;
+}
+.ssm-val.green { color: #27AE60; }
+.ssm-val.red { color: var(--red); }
+.ssm-lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--gray-600);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; font-weight: 600;
+}
+.sub-service-bullets { margin-bottom: 36px; }
+.ssb-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  color: var(--gray-400); line-height: 1.6;
+}
+.ssb-item:first-child { border-top: 1px solid var(--border); }
+.ssb-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+  flex-shrink: 0; margin-top: 6px;
+}
+
+/* Layout B: Full-width with image right, content spans 60% left — Bento-ish */
+.sub-service-B {
+  background: var(--card); border: 1px solid var(--border); margin-bottom: 2px;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0;
+  position: relative; overflow: hidden;
+}
+.sub-service-B .ssb-content {
+  padding: 60px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.sub-service-B .ssb-image {
+  height: 480px; position: relative; overflow: hidden;
+}
+.sub-service-B .ssb-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.5s ease;
+}
+.sub-service-B:hover .ssb-image img { transform: scale(1.04); filter: grayscale(0%); }
+.sub-service-B .ssb-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(270deg, rgba(217,35,45,0.08) 0%, transparent 70%);
+}
+.sub-service-B .ssb-image-tag {
+  position: absolute; top: 24px; right: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: #fff;
+  background: var(--red); padding: 6px 12px;
+}
+
+/* ============================================================
+   INLINE SPARKLINE/CHART CARDS (used within sub-services)
+============================================================ */
+.mini-data-card {
+  background: var(--black-2); border: 1px solid var(--border);
+  padding: 16px; margin-bottom: 32px;
+}
+.mdc-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+  color: var(--gray-600); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;
+}
+.mdc-svg { width: 100%; height: 60px; }
+
+/* ============================================================
+   PILLAR COLOR ACCENT BARS (top of each section)
+============================================================ */
+.pillar-accent-bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--red), #ff6b35, var(--red));
+  background-size: 200% auto; animation: shimmer 3s linear infinite;
+}
+
+/* ============================================================
+   PROCESS FLOW — VERTICAL TIMELINE (inside each pillar)
+============================================================ */
+.sub-process-timeline {
+  display: flex; flex-direction: column; gap: 0;
+  margin-bottom: 36px;
+}
+.spt-item {
+  display: flex; gap: 20px; padding: 16px 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.spt-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--red); min-width: 28px; font-weight: 600;
+}
+.spt-body { font-size: 13px; color: var(--gray-400); line-height: 1.7; }
+.spt-body strong { color: var(--white); }
+
+/* ============================================================
+   TOOL BADGES (for credibility signals)
+============================================================ */
+.tool-badges {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.tool-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: rgba(217,35,45,0.06); color: var(--red);
+  border: 1px solid rgba(217,35,45,0.2); padding: 5px 10px;
+}
+
+/* ============================================================
+   3-CARD GRID (for pillar overview block)
+============================================================ */
+.pillar-overview-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin-bottom: 2px;
+}
+.poc-card {
+  background: var(--card); padding: 36px 28px;
+  border-top: 2px solid transparent; transition: var(--transition);
+  position: relative; overflow: hidden; border: 1px solid var(--border);
+}
+.poc-card:hover { border-top-color: var(--red); }
+.poc-card-icon { margin-bottom: 20px; }
+.poc-card-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700;
+  text-transform: uppercase; color: var(--white); margin-bottom: 10px; letter-spacing: 0.03em;
+}
+.poc-card-body { font-size: 13px; color: var(--gray-400); line-height: 1.7; margin-bottom: 20px; }
+.poc-card-link {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--red);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px; transition: gap 0.2s;
+  font-weight: 600;
+}
+.poc-card:hover .poc-card-link { gap: 14px; }
+.poc-bg-num {
+  position: absolute; bottom: -8px; right: 12px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 80px;
+  color: rgba(0,0,0,0.03); line-height: 1; user-select: none;
+}
+
+/* ============================================================
+   STAT TICKER STRIP (inside pillars)
+============================================================ */
+.pillar-stat-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  margin-bottom: 80px;
+}
+.pss-item {
+  background: var(--card); padding: 28px 24px;
+  border: 1px solid var(--border); text-align: center; transition: var(--transition);
+}
+.pss-item:hover { background: var(--card-2); }
+.pss-val {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+  color: var(--white); line-height: 1;
+}
+.pss-val .r { color: var(--red); }
+.pss-lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  color: var(--gray-600); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px;
+}
+
+/* ============================================================
+   CREATIVE PORTFOLIO VISUAL (Pillar 3 special)
+============================================================ */
+.creative-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 300px 300px;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.cs-cell {
+  position: relative; overflow: hidden;
+  background: var(--card); transition: var(--transition);
+  cursor: pointer;
+}
+.cs-cell:nth-child(1) { grid-column: span 2; }
+.cs-cell:nth-child(4) { grid-column: span 2; }
+.cs-cell img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%); transition: transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.5s;
+}
+.cs-cell:hover img { transform: scale(1.05); filter: grayscale(0%); }
+.cs-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.cs-cell:hover .cs-overlay { opacity: 1; }
+.cs-label {
+  position: absolute; bottom: 20px; left: 20px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700;
+  text-transform: uppercase; color: #fff; letter-spacing: 0.05em;
+  opacity: 0; transition: opacity 0.4s ease 0.1s;
+}
+.cs-cell:hover .cs-label { opacity: 1; }
+
+/* ============================================================
+   ACCOUNT HEALTH — SHIELD VISUAL
+============================================================ */
+.health-visual-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 2px; margin-bottom: 2px;
+}
+.health-threat-feed {
+  background: #0A0A0A; padding: 48px 40px; border: 1px solid #1a1a1a;
+  font-family: 'JetBrains Mono', monospace;
+}
+.htf-title {
+  font-size: 10px; color: var(--red); letter-spacing: 0.25em;
+  text-transform: uppercase; margin-bottom: 28px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.htf-title::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--red); display: block; animation: pulse 1.5s infinite;
+}
+.htf-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.htf-status {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+  white-space: nowrap; margin-top: 1px;
+}
+.htf-status.blocked { background: rgba(217,35,45,0.15); color: #FF5A5A; }
+.htf-status.monitored { background: rgba(255,165,0,0.15); color: #FFA500; }
+.htf-status.resolved { background: rgba(39,174,96,0.15); color: #27AE60; }
+.htf-text { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.htf-time { font-size: 9px; color: rgba(255,255,255,0.2); margin-top: 3px; }
+
+.health-score-panel {
+  background: var(--card); padding: 48px 40px;
+  border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center;
+}
+.hsp-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--red);
+  letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 28px; font-weight: 600;
+}
+.hsp-score-ring {
+  display: flex; align-items: center; gap: 32px; margin-bottom: 32px;
+}
+.hsp-score-label {
+  font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: #27AE60; line-height: 1;
+}
+.hsp-score-text { font-size: 14px; color: var(--gray-400); line-height: 1.7; }
+.hsp-metrics { display: flex; flex-direction: column; gap: 12px; }
+.hsp-metric-row {
+  display: flex; align-items: center; gap: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gray-500);
+}
+.hsp-bar-track {
+  flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.hsp-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+.hsp-bar-fill.green { background: #27AE60; }
+.hsp-bar-fill.red { background: var(--red); }
+.hsp-metric-val {
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--white); min-width: 40px; text-align: right;
+}
+
+/* ============================================================
+   CTA BANNER (IDENTICAL STYLE TO HOMEPAGE)
+============================================================ */
+.cta-banner {
+  background: var(--red); padding: 80px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; overflow: hidden; gap: 40px;
+}
+.cta-banner::before {
+  content: 'ECOMMDOTS'; position: absolute; right: -20px; top: 50%;
+  transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 200px;
+  color: rgba(0,0,0,0.08); letter-spacing: 0.05em; pointer-events: none;
+  user-select: none; white-space: nowrap; z-index: 0;
+}
+.cta-banner > div { position: relative; z-index: 1; }
+.cta-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 4.5vw, 64px); color: #fff; line-height: 0.95; }
+.cta-banner-sub { font-size: 15px; color: rgba(255,255,255,0.7); margin-top: 12px; max-width: 500px; }
+.cta-banner-actions { display: flex; gap: 16px; flex-shrink: 0; flex-wrap: wrap; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer { background: #FFFFFF; padding: 90px 60px 48px; border-top: 1px solid var(--border); }
+.footer-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.2fr; gap: 64px; margin-bottom: 64px; }
+.footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-logo span { color: var(--red); }
+.footer-tagline { font-size: 14px; color: var(--gray-600); line-height: 1.8; margin-bottom: 28px; max-width: 320px; }
+.footer-social { display: flex; gap: 10px; }
+.social-btn { width: 38px; height: 38px; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gray-600); transition: var(--transition); cursor: pointer; }
+.social-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--white); margin-bottom: 24px; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { font-size: 14px; color: var(--gray-600); transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+.footer-links a:hover { color: var(--white); }
+.footer-badge { margin-top: 24px; padding: 16px 20px; background: var(--card); border: 1px solid var(--border); border-left: 2px solid var(--red); }
+.footer-badge-label { font-size: 11px; color: var(--gray-600); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+.footer-badge-val { font-size: 15px; font-weight: 600; color: var(--white); margin-top: 4px; }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-bottom-left { font-size: 13px; color: var(--gray-600); }
+.footer-bottom-right { display: flex; gap: 24px; }
+.footer-bottom-right a { font-size: 13px; color: var(--gray-600); transition: color 0.2s; }
+.footer-bottom-right a:hover { color: var(--white); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1200px) {
+  .services-hero { grid-template-columns: 1fr; padding-top: 120px; }
+  .hero-bento { display: none; }
+  .pillar-header { grid-template-columns: 1fr; }
+  .pillar-number-large { display: none; }
+  .sub-service-A, .sub-service-B { grid-template-columns: 1fr; }
+  .sub-service-A .ssa-image, .sub-service-B .ssb-image { height: 280px; }
+  .creative-showcase { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 200px); }
+  .cs-cell:nth-child(1), .cs-cell:nth-child(4) { grid-column: span 1; }
+  .pillar-stat-strip { grid-template-columns: repeat(2,1fr); }
+  .health-visual-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav { padding: 0 24px; }
+  .pillar-section { padding: 80px 24px; }
+  .services-hero { padding: 120px 24px 60px; }
+  .cta-banner { padding: 60px 24px; flex-direction: column; align-items: flex-start; }
+  .footer { padding: 60px 24px 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .pillars-index { padding: 0 24px; }
+  .pillar-overview-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .pillar-stat-strip { grid-template-columns: 1fr 1fr; }
+  .sub-service-A .ssa-content, .sub-service-B .ssb-content { padding: 40px 24px; }
+  .creative-showcase { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
+  .cs-cell:nth-child(1), .cs-cell:nth-child(4) { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">ECOMM<span>DOTS</span></div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">ECOMM<span>DOTS</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="#pillar-1" class="active">Services</a>
+    <a href="index.html#results">Results</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact" class="nav-cta"><span>Book Free Audit →</span></a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="#pillar-1" class="mobile-link">Account Mgmt</a>
+  <a href="#pillar-2" class="mobile-link">Sourcing</a>
+  <a href="#pillar-3" class="mobile-link">Creative Studio</a>
+  <a href="#pillar-4" class="mobile-link">Account Health</a>
+  <a href="index.html#contact" class="mobile-link" style="color:var(--red)">Book Free Audit →</a>
+</div>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section class="services-hero">
+  <div class="hero-geometry">
+    <div class="hero-geo-line"></div>
+    <div class="hero-geo-line"></div>
+    <div class="hero-geo-line"></div>
+    <div class="hero-geo-circle"></div>
+    <div class="hero-geo-circle"></div>
+  </div>
+
+  <div style="position:relative;z-index:1">
+    <div class="hero-overline">◆ 4 Core Pillars — 1 Growth Machine</div>
+    <h1 class="services-hero h1">
+      WE DON'T<br>JUST OFFER<br>
+      <span class="red">SERVICES.</span><br>
+      WE DEPLOY<br>
+      <span class="outline">SYSTEMS.</span>
+    </h1>
+    <p class="hero-sub-text">These are the four precision-engineered engines that power 8-figure Amazon brands. Not templates, not guesswork — battle-tested playbooks refined across 87+ brands in 12 categories.</p>
+    <div class="hero-cta-row">
+      <a href="index.html#contact" class="btn-primary"><span>Get Free Account Audit →</span></a>
+      <a href="index.html#results" class="btn-outline">View Case Studies</a>
+    </div>
+    <div class="pillar-nav">
+      <a href="#pillar-1" class="pillar-pill active">01 Account Management</a>
+      <a href="#pillar-2" class="pillar-pill">02 Product Sourcing</a>
+      <a href="#pillar-3" class="pillar-pill">03 Creative Studio</a>
+      <a href="#pillar-4" class="pillar-pill">04 Account Health</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: 4-quadrant bento -->
+  <div class="hero-bento">
+    <div class="hero-bento-card reveal d1">
+      <div class="bento-num">01</div>
+      <div class="bento-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="35" height="35" stroke="#E5E7EB"/>
+          <path d="M8 26H28" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="10" y="16" width="5" height="10" fill="#D9232D" opacity="0.3"/>
+          <rect x="10" y="14" width="5" height="12" stroke="#D9232D" stroke-width="1"/>
+          <rect x="18" y="10" width="5" height="16" fill="#D9232D" opacity="0.5"/>
+          <rect x="18" y="8" width="5" height="18" stroke="#D9232D" stroke-width="1"/>
+          <rect x="26" y="5" width="5" height="21" fill="#D9232D" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="bento-title">Account<br>Management</div>
+      <div class="bento-desc">PPC, SEO, Inventory — end-to-end operational control.</div>
+      <div class="bento-bg-num">01</div>
+    </div>
+    <div class="hero-bento-card reveal d2">
+      <div class="bento-num">02</div>
+      <div class="bento-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="35" height="35" stroke="#E5E7EB"/>
+          <path d="M18 6 L30 12 L30 24 L18 30 L6 24 L6 12 Z" stroke="#D9232D" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M18 6 L18 18 M6 12 L18 18 L30 12" stroke="#D9232D" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="18" cy="18" r="2.5" fill="#D9232D"/>
+        </svg>
+      </div>
+      <div class="bento-title">Product<br>Sourcing</div>
+      <div class="bento-desc">Global suppliers, QC, logistics from factory to FBA.</div>
+      <div class="bento-bg-num">02</div>
+    </div>
+    <div class="hero-bento-card reveal d3">
+      <div class="bento-num">03</div>
+      <div class="bento-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="35" height="35" stroke="#E5E7EB"/>
+          <rect x="8" y="12" width="20" height="16" rx="1" stroke="#D9232D" stroke-width="1.5"/>
+          <circle cx="18" cy="20" r="4" stroke="#D9232D" stroke-width="1.5"/>
+          <circle cx="18" cy="20" r="1.5" fill="#D9232D"/>
+          <path d="M14 12 L15 9 L21 9 L22 12" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="26" cy="15" r="1" fill="#D9232D"/>
+        </svg>
+      </div>
+      <div class="bento-title">Creative<br>Studio</div>
+      <div class="bento-desc">A+ content, photography, video ads that convert.</div>
+      <div class="bento-bg-num">03</div>
+    </div>
+    <div class="hero-bento-card reveal d4">
+      <div class="bento-num">04</div>
+      <div class="bento-icon">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="35" height="35" stroke="#E5E7EB"/>
+          <path d="M18 6 L30 11 L30 21 C30 27.6 24.6 32 18 33 C11.4 32 6 27.6 6 21 L6 11 Z" stroke="#D9232D" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M13 19.5 L16.5 23 L23 16" stroke="#D9232D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="bento-title">Account<br>Health</div>
+      <div class="bento-desc">Hijackers, suspensions, brand registry — fully defended.</div>
+      <div class="bento-bg-num">04</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STICKY PILLAR INDEX
+============================================================ -->
+<div class="pillars-index">
+  <div class="pillars-index-inner">
+    <a href="#pillar-1" class="pillar-index-item active" data-pillar="1">
+      <div class="pillar-index-dot"></div>01 — Account Management
+    </a>
+    <a href="#pillar-2" class="pillar-index-item" data-pillar="2">
+      <div class="pillar-index-dot"></div>02 — Product Sourcing
+    </a>
+    <a href="#pillar-3" class="pillar-index-item" data-pillar="3">
+      <div class="pillar-index-dot"></div>03 — Creative Studio
+    </a>
+    <a href="#pillar-4" class="pillar-index-item" data-pillar="4">
+      <div class="pillar-index-dot"></div>04 — Account Health
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     ██████████  PILLAR 1: ACCOUNT MANAGEMENT  ██████████
+============================================================ -->
+<section class="pillar-section" id="pillar-1" style="background: var(--black);">
+  <div class="pillar-accent-bar"></div>
+
+  <!-- Pillar Header -->
+  <div class="pillar-header">
+    <div class="pillar-number-large" style="color:rgba(217,35,45,0.04)">01</div>
+    <div>
+      <div class="pillar-label">Pillar One</div>
+      <div class="pillar-title">Account<br><span>Management.</span></div>
+      <p class="pillar-desc">Full operational control of your Amazon account — from the daily PPC battle to the long-game SEO war and the logistical chess of inventory. We run the complexity so you run the brand.</p>
+    </div>
+  </div>
+
+  <!-- Pillar Stats -->
+  <div class="pillar-stat-strip reveal">
+    <div class="pss-item">
+      <div class="pss-val">340<span class="r">%</span></div>
+      <div class="pss-lbl">Average ROAS Delivered</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">11<span class="r">%</span></div>
+      <div class="pss-lbl">Avg. ACoS Achieved</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">312<span class="r">%</span></div>
+      <div class="pss-lbl">Revenue Growth YoY</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">87<span class="r">+</span></div>
+      <div class="pss-lbl">Brands Currently Managed</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-SERVICE 1A: PPC ── -->
+  <div id="ppc" style="margin-bottom: 2px;">
+    <div class="sub-service-A reveal">
+      <!-- LEFT: Image -->
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="PPC & Ad Automation">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">PPC & Advertising</div>
+      </div>
+      <!-- RIGHT: Content -->
+      <div class="ssa-content">
+        <div class="sub-service-num">01.A — Precision PPC & Ad Automation</div>
+        <div class="sub-service-title">Turn Every<br>Ad Dollar Into<br>Profit.</div>
+        <div class="sub-service-angle">"We don't run ads. We engineer revenue."</div>
+        <p class="sub-service-body">Most brands bleed money on Amazon PPC because they're using 2019 strategies in 2025's algorithm. We rebuild your entire campaign architecture from scratch — Sponsored Products, Sponsored Brands, and DSP — using a layered bidding system that captures demand at every stage of the funnel while ruthlessly cutting wasted spend.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Helium 10</span>
+          <span class="tool-badge">DataDive</span>
+          <span class="tool-badge">Amazon DSP</span>
+          <span class="tool-badge">Bulk Operations</span>
+        </div>
+
+        <div class="mini-data-card">
+          <div class="mdc-title">ACoS Trajectory — Client Portfolio Avg (90 Days)</div>
+          <svg class="mdc-svg" viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+            <defs>
+              <linearGradient id="ppcGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#27AE60" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#27AE60" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M10 8 C 120 10, 200 38, 390 54 L390 60 L10 60Z" fill="url(#ppcGrad)"/>
+            <path d="M10 8 C 120 10, 200 38, 390 54" stroke="#27AE60" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <circle cx="10" cy="8" r="4" fill="#D9232D"/>
+            <circle cx="390" cy="54" r="5" fill="#27AE60"/>
+            <text x="2" y="5" font-family="JetBrains Mono" font-size="9" fill="#D9232D" font-weight="600">45% ACoS</text>
+            <text x="330" y="52" font-family="JetBrains Mono" font-size="9" fill="#27AE60" font-weight="600">11% ACoS</text>
+          </svg>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>Full campaign architecture rebuild — SP, SB, SD, DSP unified</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Dynamic bid adjustments based on TOD, ASIN velocity, and competitive pressure</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Negative keyword mining from 6 months of search term data</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Weekly performance reviews with clear attribution dashboards</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Scale Your Ads →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUB-SERVICE 1B: LISTING SEO ── -->
+  <div id="seo" style="margin-bottom: 2px;">
+    <div class="sub-service-B reveal">
+      <div class="ssb-content">
+        <div class="sub-service-num">01.B — Catalog SEO & Listing Dominance</div>
+        <div class="sub-service-title">Own Page<br>One.<br><span style="color:var(--red)">Own the<br>Category.</span></div>
+        <div class="sub-service-angle">"The algorithm rewards relevance. We manufacture it."</div>
+        <p class="sub-service-body">Your listing is a sales machine. Most brands treat it like a product spec sheet. We deploy a 6-layer SEO methodology — from backend search terms to A9-signal-aligned bullet copy — that puts your ASINs on Page 1 and keeps them there through algorithm changes.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Helium 10 Magnet</span>
+          <span class="tool-badge">Cerebro</span>
+          <span class="tool-badge">DataDive</span>
+          <span class="tool-badge">Split Testing</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val green">340</div>
+            <div class="ssm-lbl">Avg. Keywords Ranked</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val red">+688%</div>
+            <div class="ssm-lbl">Best Revenue Lift</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">#1</div>
+            <div class="ssm-lbl">Page Rank Achieved</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>Title architecture engineered for click-through rate AND indexation</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Backend keyword saturation using Platinum Keywords and Subject Matter</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Conversion-rate-optimized bullet points with latent semantic indexing</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>A/B tested descriptions with Brand Story integration</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Rank Higher →</span></a>
+      </div>
+      <div class="ssb-image">
+        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=700&q=80" alt="Catalog SEO">
+        <div class="ssb-image-overlay"></div>
+        <div class="ssb-image-tag">Listing SEO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUB-SERVICE 1C: INVENTORY ── -->
+  <div id="inventory">
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80" alt="Inventory & Forecasting">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Inventory Intelligence</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">01.C — Inventory & Forecasting Logistics</div>
+        <div class="sub-service-title">Never<br>Stock Out.<br>Never<br>Overstock.</div>
+        <div class="sub-service-angle">"Out-of-stock kills rank. We make it impossible."</div>
+        <p class="sub-service-body">A single stock-out event can cost you 60 days of rank recovery. We build rolling 13-week demand forecasts using your sales velocity, lead time, seasonality data, and Amazon's own Buy Box loss data — so your inventory decisions are driven by data, not gut feel.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Inventory Lab</span>
+          <span class="tool-badge">Restock Pro</span>
+          <span class="tool-badge">FBA Forecast</span>
+          <span class="tool-badge">SKU Economics</span>
+        </div>
+
+        <div class="sub-service-process-viz" style="margin-bottom:28px">
+          <svg viewBox="0 0 440 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:80px">
+            <!-- Inventory flow arrows -->
+            <rect x="0" y="28" width="60" height="24" rx="2" fill="rgba(217,35,45,0.08)" stroke="#D9232D" stroke-width="1"/>
+            <text x="30" y="44" font-family="JetBrains Mono" font-size="8" fill="#D9232D" text-anchor="middle" font-weight="600">FORECAST</text>
+            <path d="M62 40 L80 40" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M76 36 L82 40 L76 44" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="82" y="28" width="60" height="24" rx="2" fill="rgba(217,35,45,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="112" y="44" font-family="JetBrains Mono" font-size="8" fill="#4B5563" text-anchor="middle" font-weight="600">ORDER</text>
+            <path d="M144 40 L162 40" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M158 36 L164 40 L158 44" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="164" y="28" width="60" height="24" rx="2" fill="rgba(217,35,45,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="194" y="44" font-family="JetBrains Mono" font-size="8" fill="#4B5563" text-anchor="middle" font-weight="600">SHIP</text>
+            <path d="M226 40 L244 40" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M240 36 L246 40 L240 44" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="246" y="28" width="60" height="24" rx="2" fill="rgba(217,35,45,0.06)" stroke="#E5E7EB" stroke-width="1"/>
+            <text x="276" y="44" font-family="JetBrains Mono" font-size="8" fill="#4B5563" text-anchor="middle" font-weight="600">RECEIVE</text>
+            <path d="M308 40 L326 40" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M322 36 L328 40 L322 44" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="328" y="28" width="60" height="24" rx="2" fill="rgba(39,174,96,0.08)" stroke="#27AE60" stroke-width="1"/>
+            <text x="358" y="44" font-family="JetBrains Mono" font-size="8" fill="#27AE60" text-anchor="middle" font-weight="600">IN STOCK</text>
+            <!-- Danger zone label -->
+            <text x="220" y="12" font-family="JetBrains Mono" font-size="7" fill="#D9232D" text-anchor="middle" opacity="0.6">ZERO STOCK-OUTS GUARANTEED</text>
+            <path d="M80 16 L360 16" stroke="#D9232D" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+          </svg>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>13-week rolling demand forecasts with seasonality overlays</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Automated reorder alerts with lead time buffers built in</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>IPI score management to avoid long-term storage fees</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Multi-warehouse distribution strategy for split shipments</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Optimize Inventory →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ██████████  PILLAR 2: PRODUCT SOURCING  ██████████
+============================================================ -->
+<section class="pillar-section" id="pillar-2" style="background: var(--black-2);">
+  <div class="pillar-accent-bar"></div>
+
+  <div class="pillar-header">
+    <div class="pillar-number-large" style="color:rgba(217,35,45,0.03)">02</div>
+    <div>
+      <div class="pillar-label">Pillar Two</div>
+      <div class="pillar-title">Product<br><span>Sourcing.</span></div>
+      <p class="pillar-desc">Margins are made at the source, not the storefront. We navigate the global supply chain — factories in Shenzhen, QC labs in Dongguan, freight forwarders in LA — so you never get burned by a bad supplier again.</p>
+    </div>
+  </div>
+
+  <div class="pillar-stat-strip reveal">
+    <div class="pss-item">
+      <div class="pss-val">40<span class="r">%</span></div>
+      <div class="pss-lbl">Avg. COGS Reduction</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">200<span class="r">+</span></div>
+      <div class="pss-lbl">Vetted Supplier Network</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">99<span class="r">%</span></div>
+      <div class="pss-lbl">On-Time Delivery Rate</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">15<span class="r">+</span></div>
+      <div class="pss-lbl">Countries Sourced From</div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 2A: SUPPLIER NEGOTIATION -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=900&q=80" alt="Global Supplier Negotiation">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Global Sourcing</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">02.A — Global Supplier Negotiation</div>
+        <div class="sub-service-title">Lower<br>COGS.<br>Better<br>Margins.</div>
+        <div class="sub-service-angle">"We speak factory — so you don't have to."</div>
+        <p class="sub-service-body">Finding a supplier on Alibaba is easy. Finding a reliable, audit-ready factory that can scale with you, meet Amazon compliance requirements, and negotiate fair unit economics — that takes years of relationships. We have them. You inherit them on day one.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Alibaba Verified</span>
+          <span class="tool-badge">Global Sources</span>
+          <span class="tool-badge">Made-in-China</span>
+          <span class="tool-badge">COGS Calculator</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val green">40%</div>
+            <div class="ssm-lbl">Avg. Cost Reduction</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">200+</div>
+            <div class="ssm-lbl">Vetted Factories</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val red">48h</div>
+            <div class="ssm-lbl">Avg. Sample Turnaround</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>RFQ distribution to 5–10 pre-vetted factories per category</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Factory audit reports covering compliance, capacity, and financials</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Price benchmarking against 3 independent quotes before final selection</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Payment term negotiation — Net 30/60 with escrow protection</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Find Suppliers →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 2B: QUALITY CONTROL -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-B reveal">
+      <div class="ssb-content">
+        <div class="sub-service-num">02.B — Quality Control & Sampling</div>
+        <div class="sub-service-title">Zero<br>Defects.<br><span style="color:var(--red)">Zero<br>Returns.</span></div>
+        <div class="sub-service-angle">"One bad batch can tank your BSR and your reviews."</div>
+        <p class="sub-service-body">We embed a 4-stage QC process into every production run — from pre-production spec alignment, to in-process checks at 30% and 70% completion, to a final pre-shipment inspection against your product checklist. Every defect caught before it reaches a customer.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">QIMA Network</span>
+          <span class="tool-badge">SGS Certified</span>
+          <span class="tool-badge">AQL Sampling</span>
+        </div>
+
+        <div class="sub-service-process-timeline">
+          <div class="spt-item">
+            <div class="spt-num">01</div>
+            <div class="spt-body"><strong>Pre-Production:</strong> Golden sample approval, spec sheet sign-off, and materials testing before a single unit is produced.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">02</div>
+            <div class="spt-body"><strong>In-Process (30%):</strong> On-site inspector checks first articles for dimension, color, and packaging conformity.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">03</div>
+            <div class="spt-body"><strong>Pre-Shipment (100%):</strong> AQL Level II inspection of finished goods against your custom defect checklist.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">04</div>
+            <div class="spt-body"><strong>Container Loading:</strong> Supervision of packing and loading with photo/video documentation of every pallet.</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Ensure Quality →</span></a>
+      </div>
+      <div class="ssb-image">
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=700&q=80" alt="Quality Control">
+        <div class="ssb-image-overlay"></div>
+        <div class="ssb-image-tag">QC & Sampling</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 2C: FREIGHT -->
+  <div>
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=80" alt="Freight & Customs">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Freight & Logistics</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">02.C — Freight & Customs Navigation</div>
+        <div class="sub-service-title">From<br>Factory<br>Floor to<br>FBA. Done.</div>
+        <div class="sub-service-angle">"We've cleared customs in 14 countries. Yours won't be our first."</div>
+        <p class="sub-service-body">International shipping is a minefield — container delays, port congestion, HTS code misclassifications, and demurrage charges that wipe out your margin. We partner with 3 freight networks and one dedicated customs broker to get your goods from origin to Amazon FC on time, every time.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Sea & Air Freight</span>
+          <span class="tool-badge">Customs Bond</span>
+          <span class="tool-badge">ISF Filing</span>
+          <span class="tool-badge">Amazon FBA Prep</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val green">99%</div>
+            <div class="ssm-lbl">On-Time Delivery</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">30%</div>
+            <div class="ssm-lbl">Avg. Freight Savings</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val red">0</div>
+            <div class="ssm-lbl">Customs Holds YTD</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>Sea LCL/FCL and air freight routing with best-rate comparison</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>HTS code optimization to minimize import duty liability</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Amazon FBA-compliant labeling, palletization, and carton marking</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Real-time tracking with proactive delay alerts and rerouting</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Streamline Freight →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ██████████  PILLAR 3: CREATIVE STUDIO  ██████████
+============================================================ -->
+<section class="pillar-section" id="pillar-3" style="background: var(--black);">
+  <div class="pillar-accent-bar"></div>
+
+  <div class="pillar-header">
+    <div class="pillar-number-large" style="color:rgba(217,35,45,0.04)">03</div>
+    <div>
+      <div class="pillar-label">Pillar Three</div>
+      <div class="pillar-title">Creative<br><span>Studio.</span></div>
+      <p class="pillar-desc">Buyers decide in 3 seconds. Your visuals make or break the click, the conversion, and the review. We build premium creative assets that don't just look good — they sell.</p>
+    </div>
+  </div>
+
+  <div class="pillar-stat-strip reveal">
+    <div class="pss-item">
+      <div class="pss-val">2<span class="r">x</span></div>
+      <div class="pss-lbl">Avg. CVR Lift</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">4.9<span class="r">/5</span></div>
+      <div class="pss-lbl">Creative Quality Rating</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">500<span class="r">+</span></div>
+      <div class="pss-lbl">Listings Redesigned</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">72h</div>
+      <div class="pss-lbl">Avg. Turnaround</div>
+    </div>
+  </div>
+
+  <!-- Creative Portfolio Mosaic -->
+  <div class="creative-showcase reveal" style="margin-bottom: 80px;">
+    <div class="cs-cell">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80" alt="A+ Content">
+      <div class="cs-overlay"></div>
+      <div class="cs-label">A+ Premium Content</div>
+    </div>
+    <div class="cs-cell">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Product Photography">
+      <div class="cs-overlay"></div>
+      <div class="cs-label">Lifestyle Photography</div>
+    </div>
+    <div class="cs-cell">
+      <img src="https://images.unsplash.com/photo-1556742031-c6961e8560b0?auto=format&fit=crop&w=600&q=80" alt="Video Ads">
+      <div class="cs-overlay"></div>
+      <div class="cs-label">Video Ad Production</div>
+    </div>
+    <div class="cs-cell">
+      <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1000&q=80" alt="3D Renders">
+      <div class="cs-overlay"></div>
+      <div class="cs-label">3D Rendering & CGI</div>
+    </div>
+    <div class="cs-cell">
+      <img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?auto=format&fit=crop&w=600&q=80" alt="Infographics">
+      <div class="cs-overlay"></div>
+      <div class="cs-label">Infographic Design</div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 3A: A+ CONTENT -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-B reveal">
+      <div class="ssb-content">
+        <div class="sub-service-num">03.A — Premium A+ Content & Brand Story</div>
+        <div class="sub-service-title">Listings<br>That Close<br><span style="color:var(--red)">Before<br>The Click.</span></div>
+        <div class="sub-service-angle">"A+ content isn't decoration. It's conversion architecture."</div>
+        <p class="sub-service-body">We design A+ Content that functions as a direct response sales page — visual hierarchy, objection-handling modules, benefit-driven comparison charts, and a Brand Story that builds equity, not just awareness. Brands that switch to our A+ design see an average 2x increase in conversion rate within 30 days.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Enhanced Brand Content</span>
+          <span class="tool-badge">Brand Story Modules</span>
+          <span class="tool-badge">A+ Premium Layouts</span>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>Full 12-module Premium A+ with custom comparison tables</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Competitor differentiation matrix built into every module</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Brand Story with founder narrative and brand values architecture</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Mobile-first design — 70% of Amazon purchases happen on mobile</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Upgrade Visuals →</span></a>
+      </div>
+      <div class="ssb-image">
+        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=700&q=80" alt="A+ Content Design">
+        <div class="ssb-image-overlay"></div>
+        <div class="ssb-image-tag">A+ Content</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 3B: PHOTOGRAPHY -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?auto=format&fit=crop&w=900&q=80" alt="Product Photography">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Photography & 3D</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">03.B — High-Converting Photography & 3D Renders</div>
+        <div class="sub-service-title">Main Images<br>That Stop<br>The Scroll.</div>
+        <div class="sub-service-angle">"Your main image is your billboard. Make it earn it."</div>
+        <p class="sub-service-body">We produce studio photography, lifestyle shoots, and photorealistic 3D CGI renders designed specifically for Amazon's search grid. Our main images are engineered with contrast analysis, whitespace optimization, and CTR-first composition — not just beautiful photography for the sake of it.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Studio Shoot</span>
+          <span class="tool-badge">Lifestyle Shoot</span>
+          <span class="tool-badge">3D CGI Render</span>
+          <span class="tool-badge">CTR Testing</span>
+        </div>
+
+        <div class="mini-data-card">
+          <div class="mdc-title">Click-Through Rate Lift — New Main Image vs Old</div>
+          <svg class="mdc-svg" viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="80" height="32" rx="2" fill="#E5E7EB"/>
+            <text x="50" y="40" font-family="JetBrains Mono" font-size="9" fill="#6B7280" text-anchor="middle">2.1% CTR</text>
+            <text x="50" y="16" font-family="JetBrains Mono" font-size="8" fill="#9CA3AF" text-anchor="middle">BEFORE</text>
+            <path d="M96 36 L120 36" stroke="#D9232D" stroke-width="1.5"/>
+            <path d="M116 32 L122 36 L116 40" stroke="#D9232D" stroke-width="1.5" stroke-linecap="round"/>
+            <text x="140" y="30" font-family="JetBrains Mono" font-size="8" fill="#D9232D" text-anchor="middle">+124%</text>
+            <rect x="180" y="8" width="80" height="44" rx="2" fill="rgba(217,35,45,0.15)" stroke="#D9232D" stroke-width="1.5"/>
+            <text x="220" y="34" font-family="JetBrains Mono" font-size="9" fill="#D9232D" text-anchor="middle" font-weight="700">4.7% CTR</text>
+            <text x="220" y="16" font-family="JetBrains Mono" font-size="8" fill="#D9232D" text-anchor="middle" opacity="0.7">AFTER</text>
+            <text x="220" y="45" font-family="JetBrains Mono" font-size="7" fill="#D9232D" text-anchor="middle">2x More Clicks</text>
+          </svg>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>White-background hero shots + 6 lifestyle images per ASIN</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Photorealistic 3D CGI renders for pre-production launches</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Infographic images with feature callouts and size comparisons</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>PickFu CTR split testing on 2 main image variations</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>View Portfolio →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 3C: VIDEO ADS -->
+  <div>
+    <div class="sub-service-B reveal">
+      <div class="ssb-content">
+        <div class="sub-service-num">03.C — Shoppable Video Ads</div>
+        <div class="sub-service-title">Video<br>Sells What<br><span style="color:var(--red)">Images<br>Can't.</span></div>
+        <div class="sub-service-angle">"60 seconds. One hook. Thousands of conversions."</div>
+        <p class="sub-service-body">Video ads on Amazon Sponsored Brands and OTT are the most underutilized high-ROAS lever in the ecosystem. We produce direct-response video creatives — UGC-style testimonials, studio product demos, and animated explainers — optimized for silent-autoplay, mobile-first consumption, and Amazon's CTR scoring algorithm.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Sponsored Brands Video</span>
+          <span class="tool-badge">Amazon OTT / DSP</span>
+          <span class="tool-badge">UGC Production</span>
+          <span class="tool-badge">Studio Demo</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val green">4.8x</div>
+            <div class="ssm-lbl">Video vs Image ROAS</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val red">72h</div>
+            <div class="ssm-lbl">Production Turnaround</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">3</div>
+            <div class="ssm-lbl">Variations Per Brief</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>15 and 30-second hook-driven cuts for Sponsored Brand Video</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>UGC creator network with 200+ verified Amazon reviewers</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Animated product explainers with motion graphics and supers</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Full OTT/streaming campaign setup and audience segmentation</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Drive Video Sales →</span></a>
+      </div>
+      <div class="ssb-image">
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&q=80" alt="Video Production">
+        <div class="ssb-image-overlay"></div>
+        <div class="ssb-image-tag">Video Ad Studio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ██████████  PILLAR 4: ACCOUNT HEALTH  ██████████
+============================================================ -->
+<section class="pillar-section" id="pillar-4" style="background: var(--black-2);">
+  <div class="pillar-accent-bar"></div>
+
+  <div class="pillar-header">
+    <div class="pillar-number-large" style="color:rgba(217,35,45,0.03)">04</div>
+    <div>
+      <div class="pillar-label">Pillar Four</div>
+      <div class="pillar-title">Account<br><span>Health.</span></div>
+      <p class="pillar-desc">Amazon is an actively hostile environment for brands. Hijackers, policy traps, IP violations, and algorithmic suspensions can wipe out years of work in 48 hours. We build the shield before you need it.</p>
+    </div>
+  </div>
+
+  <div class="pillar-stat-strip reveal">
+    <div class="pss-item">
+      <div class="pss-val">100<span class="r">%</span></div>
+      <div class="pss-lbl">Suspension Recovery Rate</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">48<span class="r">h</span></div>
+      <div class="pss-lbl">Avg. Reinstatement Time</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">0</div>
+      <div class="pss-lbl">Active Hijackers (Current Clients)</div>
+    </div>
+    <div class="pss-item">
+      <div class="pss-val">50<span class="r">+</span></div>
+      <div class="pss-lbl">Brands Protected</div>
+    </div>
+  </div>
+
+  <!-- Threat Feed + Health Score Visual -->
+  <div class="health-visual-grid reveal" style="margin-bottom: 80px;">
+    <div class="health-threat-feed">
+      <div class="htf-title">Live Brand Protection Feed</div>
+      <div class="htf-item">
+        <div>
+          <div class="htf-status blocked">BLOCKED</div>
+        </div>
+        <div>
+          <div class="htf-text">Unauthorized 3P seller on ASIN B0XXXXX — price undercutting detected</div>
+          <div class="htf-time">2 minutes ago · Health Supplements · US</div>
+        </div>
+      </div>
+      <div class="htf-item">
+        <div>
+          <div class="htf-status resolved">RESOLVED</div>
+        </div>
+        <div>
+          <div class="htf-text">Trademark infringement claim filed — counterfeit listing removed within 6h</div>
+          <div class="htf-time">1 hour ago · Beauty · UAE</div>
+        </div>
+      </div>
+      <div class="htf-item">
+        <div>
+          <div class="htf-status monitored">WATCHING</div>
+        </div>
+        <div>
+          <div class="htf-text">Competitor IP complaint lodged — filing defensive documentation</div>
+          <div class="htf-time">3 hours ago · Kitchen · Canada</div>
+        </div>
+      </div>
+      <div class="htf-item">
+        <div>
+          <div class="htf-status blocked">BLOCKED</div>
+        </div>
+        <div>
+          <div class="htf-text">Review manipulation campaign detected on competitor — report submitted</div>
+          <div class="htf-time">5 hours ago · Sports · UK</div>
+        </div>
+      </div>
+      <div class="htf-item">
+        <div>
+          <div class="htf-status resolved">RESOLVED</div>
+        </div>
+        <div>
+          <div class="htf-text">Account health score restored to 1000/1000 — policy appeal accepted</div>
+          <div class="htf-time">Yesterday · Baby Care · US</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;text-transform:uppercase">Monitoring 50+ brands · 24/7/365</div>
+    </div>
+
+    <div class="health-score-panel">
+      <div class="hsp-title">Account Health Dashboard — Composite Score</div>
+      <div class="hsp-score-ring">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gray-600);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px">Overall Score</div>
+          <div class="hsp-score-label">1000</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#27AE60;letter-spacing:0.1em;margin-top:4px">/ 1000 · EXCELLENT</div>
+        </div>
+        <div class="hsp-score-text">After ECOMMDOTS engagement. Previous score was 420 — account was at risk of suspension. Restored in 48 hours.</div>
+      </div>
+      <div class="hsp-metrics">
+        <div class="hsp-metric-row">
+          <span style="min-width:140px">Policy Compliance</span>
+          <div class="hsp-bar-track"><div class="hsp-bar-fill green" style="width:100%"></div></div>
+          <span class="hsp-metric-val" style="color:#27AE60">100%</span>
+        </div>
+        <div class="hsp-metric-row">
+          <span style="min-width:140px">Order Defect Rate</span>
+          <div class="hsp-bar-track"><div class="hsp-bar-fill green" style="width:97%"></div></div>
+          <span class="hsp-metric-val" style="color:#27AE60">0.3%</span>
+        </div>
+        <div class="hsp-metric-row">
+          <span style="min-width:140px">Late Dispatch Rate</span>
+          <div class="hsp-bar-track"><div class="hsp-bar-fill green" style="width:99%"></div></div>
+          <span class="hsp-metric-val" style="color:#27AE60">0.1%</span>
+        </div>
+        <div class="hsp-metric-row">
+          <span style="min-width:140px">IP Violation Flags</span>
+          <div class="hsp-bar-track"><div class="hsp-bar-fill green" style="width:100%"></div></div>
+          <span class="hsp-metric-val" style="color:#27AE60">ZERO</span>
+        </div>
+        <div class="hsp-metric-row">
+          <span style="min-width:140px">Listing Suppression</span>
+          <div class="hsp-bar-track"><div class="hsp-bar-fill green" style="width:100%"></div></div>
+          <span class="hsp-metric-val" style="color:#27AE60">NONE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 4A: HIJACKER DEFENSE -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Brand Protection">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Brand Defense</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">04.A — Hijacker Defense & IP Protection</div>
+        <div class="sub-service-title">Your Brand.<br>Defended<br>24/7.</div>
+        <div class="sub-service-angle">"We identify hijackers before they steal your first sale."</div>
+        <p class="sub-service-body">Buy Box hijackers, counterfeit sellers, and unauthorized resellers cost Amazon brands an estimated $2B+ per year. Our monitoring system sends alerts the moment an unauthorized seller appears on your listing. We file cease-and-desist notices, IPCRR complaints, and escalate to Amazon Brand Registry enforcement — so hijackers are removed within hours, not weeks.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">Brand Registry</span>
+          <span class="tool-badge">IPCRR System</span>
+          <span class="tool-badge">Transparency Program</span>
+          <span class="tool-badge">Project Zero</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val red">&lt;4h</div>
+            <div class="ssm-lbl">Avg. Removal Time</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val green">100%</div>
+            <div class="ssm-lbl">Removal Success Rate</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">24/7</div>
+            <div class="ssm-lbl">Monitoring Uptime</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>Real-time Buy Box monitoring with automated alert system</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>IPCRR intellectual property complaint filing with full documentation</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Project Zero enrollment and counterfeit removal tool setup</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Amazon Transparency serialization for 100% counterfeit prevention</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Protect Brand →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 4B: SUSPENSION APPEALS -->
+  <div style="margin-bottom: 2px;">
+    <div class="sub-service-B reveal">
+      <div class="ssb-content">
+        <div class="sub-service-num">04.B — Suspension Appeals & Reinstatement</div>
+        <div class="sub-service-title">Suspended?<br>Back Online<br><span style="color:var(--red)">In 48<br>Hours.</span></div>
+        <div class="sub-service-angle">"We've never failed to reinstate a client account."</div>
+        <p class="sub-service-body">An Amazon account suspension is a 5-alarm emergency. Every day offline costs you BSR, rank, and revenue that takes months to recover. Our suspension team — former Amazon Seller Performance experts — writes Plans of Action that are specific, evidence-backed, and accepted first-time. We do not use templates. Every POA is custom-written for your exact suspension reason.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">POA Writing</span>
+          <span class="tool-badge">ASIN Reinstatement</span>
+          <span class="tool-badge">Account Appeal</span>
+          <span class="tool-badge">Escalation Path</span>
+        </div>
+
+        <div class="sub-process-timeline">
+          <div class="spt-item">
+            <div class="spt-num">01</div>
+            <div class="spt-body"><strong>Emergency Triage (0–4h):</strong> Read every performance notification, identify root cause, document timeline of events.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">02</div>
+            <div class="spt-body"><strong>POA Drafting (4–12h):</strong> Write a custom Plan of Action addressing the specific violation with evidence and corrective actions.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">03</div>
+            <div class="spt-body"><strong>Submission & Escalation:</strong> File via Seller Central and simultaneously pursue Seller Performance escalation if needed.</div>
+          </div>
+          <div class="spt-item">
+            <div class="spt-num">04</div>
+            <div class="spt-body"><strong>Reinstatement Confirmed:</strong> Average 48-hour turnaround. We do not stop until you are live again.</div>
+          </div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Recover Account →</span></a>
+      </div>
+      <div class="ssb-image">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Suspension Appeals">
+        <div class="ssb-image-overlay"></div>
+        <div class="ssb-image-tag">Account Recovery</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-SERVICE 4C: BRAND REGISTRY -->
+  <div>
+    <div class="sub-service-A reveal">
+      <div class="ssa-image">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt="Brand Registry">
+        <div class="ssa-image-overlay"></div>
+        <div class="ssa-image-tag">Brand Registry</div>
+      </div>
+      <div class="ssa-content">
+        <div class="sub-service-num">04.C — Brand Registry Mastery</div>
+        <div class="sub-service-title">Unlock<br>Every<br>Amazon<br>Privilege.</div>
+        <div class="sub-service-angle">"Unregistered brands leave $50K+ of free tools on the table."</div>
+        <p class="sub-service-body">Amazon Brand Registry unlocks A+ Content, Brand Store, Sponsored Brand ads, Brand Analytics, and the full suite of intellectual property tools. But enrollment is a minefield of trademark requirements, appeal processes, and verification hurdles. We handle the entire registration journey — from USPTO trademark strategy through Amazon verification — and then help you extract maximum value from every premium feature unlocked.</p>
+
+        <div class="tool-badges">
+          <span class="tool-badge">USPTO Trademark</span>
+          <span class="tool-badge">Brand Analytics</span>
+          <span class="tool-badge">Brand Store</span>
+          <span class="tool-badge">Posts & Inspire</span>
+        </div>
+
+        <div class="sub-service-metrics">
+          <div class="ssm-item">
+            <div class="ssm-val green">14</div>
+            <div class="ssm-lbl">Days Avg. Enrollment</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val">12+</div>
+            <div class="ssm-lbl">Premium Tools Unlocked</div>
+          </div>
+          <div class="ssm-item">
+            <div class="ssm-val red">100%</div>
+            <div class="ssm-lbl">Approval Rate</div>
+          </div>
+        </div>
+
+        <div class="sub-service-bullets">
+          <div class="ssb-item"><div class="ssb-dot"></div>End-to-end Brand Registry enrollment with trademark coordination</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Brand Store design — 5-page storefront with custom imagery</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Brand Analytics setup — Share of Voice, Search Frequency Rank, Repeat Purchase rate</div>
+          <div class="ssb-item"><div class="ssb-dot"></div>Amazon Posts and Inspire content calendar for organic brand reach</div>
+        </div>
+
+        <a href="index.html#contact" class="btn-primary"><span>Unlock Registry →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="back-home-wrapper">
+  <a href="index.html" class="btn-premium-back reveal">
+    <span class="arrow-back">←</span>
+    <span class="btn-text">Return to Homepage</span>
+    <div class="line-back"></div>
+    <div class="glow-back"></div>
+  </a>
+</div>
+
+<!-- ============================================================
+     FINAL CTA BANNER
+============================================================ -->
+<div class="cta-banner">
+  <div>
+    <div class="cta-banner-title">READY TO STOP LOSING<br>MONEY TO YOUR<br>COMPETITORS?</div>
+    <div class="cta-banner-sub">Book a free 30-min strategy call. We'll run a live audit of your account and show you exactly what's bleeding revenue — with zero obligation.</div>
+  </div>
+  <div class="cta-banner-actions">
+    <a href="index.html#contact" class="btn-white"><span>Get Your Free Account Audit →</span></a>
+    <a href="https://wa.me/923124287538" target="_blank" class="btn-white-outline"><span>💬 WhatsApp Us</span></a>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">ECOMM<span>DOTS</span></div>
+      <div class="footer-tagline">A data-driven Amazon growth system. Not freelancers — a scalable machine built to take your brand to 7 and 8 figures on Amazon and beyond.</div>
+      <div class="footer-social">
+        <a href="#" class="social-btn">YT</a>
+        <a href="#" class="social-btn">FB</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">𝕏</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#pillar-1">Account Management</a></li>
+        <li><a href="#ppc">Amazon PPC</a></li>
+        <li><a href="#seo">Listing Optimization</a></li>
+        <li><a href="#inventory">Inventory Planning</a></li>
+        <li><a href="#pillar-2">Product Sourcing</a></li>
+        <li><a href="#pillar-3">Creative Studio</a></li>
+        <li><a href="#pillar-4">Account Health</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About ECOMMDOTS</a></li>
+        <li><a href="index.html#cases">Case Studies</a></li>
+        <li><a href="index.html#process">Our Process</a></li>
+        <li><a href="index.html#blog">Blog & Insights</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:ecommdots@gmail.com">ecommdots@gmail.com</a></li>
+        <li><a href="tel:+923124287538">+92 312 4287538</a></li>
+        <li><a href="https://wa.me/923124287538" target="_blank">WhatsApp Us</a></li>
+        <li><a href="index.html#contact">Book a Strategy Call</a></li>
+      </ul>
+      <div class="footer-badge">
+        <div class="footer-badge-label">Currently accepting</div>
+        <div class="footer-badge-val">3 new brands this month</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">© 2025 ECOMMDOTS Digital Agency. All rights reserved.</div>
+    <div class="footer-bottom-right">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+// ── LOADER ──
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1400);
+});
+
+// ── CUSTOM CURSOR ──
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursorFollower');
+let mouseX = 0, mouseY = 0, fx = 0, fy = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
+});
+(function animateCursor() {
+  fx += (mouseX - fx) * 0.12; fy += (mouseY - fy) * 0.12;
+  follower.style.left = fx + 'px'; follower.style.top = fy + 'px';
+  requestAnimationFrame(animateCursor);
+})();
+
+// ── NAVBAR SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  updateActiveIndex();
+});
+
+// ── HAMBURGER ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  const spans = hamburger.querySelectorAll('span');
+  if (mobileMenu.classList.contains('open')) {
+    spans[0].style.cssText = 'transform:rotate(45deg) translate(5px,5px)';
+    spans[1].style.cssText = 'opacity:0';
+    spans[2].style.cssText = 'transform:rotate(-45deg) translate(5px,-5px)';
+  } else { spans.forEach(s => s.style.cssText = ''); }
+});
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.querySelectorAll('span').forEach(s => s.style.cssText = '');
+  });
+});
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = target.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── STICKY INDEX — ACTIVE STATE ──
+function updateActiveIndex() {
+  const pillars = ['pillar-1','pillar-2','pillar-3','pillar-4'];
+  const indexItems = document.querySelectorAll('.pillar-index-item');
+  let current = '';
+  pillars.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 160) current = id;
+  });
+  indexItems.forEach(item => {
+    const pillarNum = item.dataset.pillar;
+    item.classList.toggle('active', 'pillar-' + pillarNum === current);
+  });
+  // Also update hero pills
+  document.querySelectorAll('.pillar-pill').forEach(pill => {
+    const href = pill.getAttribute('href').replace('#', '');
+    pill.classList.toggle('active', href === current);
+  });
+}
+
+// ── REVEAL OBSERVER ──
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObs.observe(el));
+
+// ── IMAGE HOVER — GRAYSCALE LIFT (already via CSS, this adds parallax) ──
+document.querySelectorAll('.ssa-image, .ssb-image').forEach(container => {
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    const img = container.querySelector('img');
+    if (img) {
+      img.style.transform = `scale(1.04) translate(${xPct * -10}px, ${yPct * -10}px)`;
+    }
+  });
+  container.addEventListener('mouseleave', () => {
+    const img = container.querySelector('img');
+    if (img) img.style.transform = '';
+  });
+});
+
+// ── CREATIVE CELL subtle tilt ──
+document.querySelectorAll('.cs-cell').forEach(cell => {
+  cell.addEventListener('mousemove', (e) => {
+    const rect = cell.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    cell.style.transform = `perspective(800px) rotateY(${xPct * 4}deg) rotateX(${-yPct * 4}deg)`;
+  });
+  cell.addEventListener('mouseleave', () => {
+    cell.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>
