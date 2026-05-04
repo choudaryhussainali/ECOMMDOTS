@@ -1,0 +1,2944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Ecommdots | Elite Amazon Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+/* ==========================================================================
+   ECOMMDOTS — MASTER STYLESHEET (VISUAL-FIRST + SUB-CARDS)
+   ========================================================================== */
+
+:root {
+    --bg-base:       #ffffff;
+    --text-main:     #0a0a0a;
+    --text-inverse:  #ffffff;
+    --red:           #d9232d;
+    --red-glow:      rgba(217,35,45,0.15);
+    --charcoal:      #111111;
+    --border-light:  rgba(255,255,255,0.05);
+    --font-display:  'Bebas Neue', sans-serif;
+    --font-sans:     'Barlow', sans-serif;
+    --transition:    0.4s cubic-bezier(0.16,1,0.3,1);
+    --glass-bg:      rgba(5,5,5,0.85);
+}
+
+
+/* SOCIALS */
+
+
+.social-sidebar {
+position: fixed;
+right: 0;
+top: 50%;
+transform: translateY(-50%);
+display: flex;
+flex-direction: column;
+z-index: 9999;
+}
+
+.toggle-btn {
+width: 52px;
+height: 58px;
+background: #111111;
+border: none;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #ffffff;
+padding: 0;
+outline: none;
+transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+background: #333333;
+}
+
+.arrow-icon {
+width: 18px;
+height: 18px;
+transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Rotate arrow when open */
+.social-sidebar.open .arrow-icon {
+transform: rotate(180deg);
+}
+
+/* The collapsible container */
+.social-links {
+overflow: hidden;
+max-height: 0;
+transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.3s ease;
+opacity: 0;
+}
+
+.social-sidebar.open .social-links {
+max-height: 200px;
+opacity: 1;
+}
+
+.social-btn {
+width: 52px;
+height: 58px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+transition: filter 0.2s;
+}
+
+.social-btn svg {
+width: 22px;
+height: 22px;
+}
+
+.social-btn:hover {
+filter: brightness(1.15);
+}
+
+.whatsapp-btn {
+background: #25D366;
+color: #ffffff;
+}
+
+.email-btn {
+background: #E53935;
+color: #ffffff;
+}
+
+
+
+/* ─── RESET ─── */
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none!important;}
+html{scroll-behavior:smooth;overflow-x:hidden;} /* Moved overflow here */
+body{font-family:var(--font-sans);line-height:1.6;color:var(--text-main);background:#fff;-webkit-font-smoothing:antialiased;} /* Removed overflow here */
+.container{width:90%;max-width:1400px;margin:0 auto;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ─── ELITE CUSTOM CURSOR (MAX Z-INDEX) ─── */
+#cur-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    /* Elevated to guarantee it sits above all modals */
+    z-index: 9999999; 
+    transform: translate(-50%,-50%);
+    transition: width 0.16s ease, height 0.16s ease, background 0.16s ease, opacity 0.2s ease;
+}
+
+#cur-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    /* One layer just below the dot, but above everything else */
+    z-index: 9999998; 
+    transform: translate(-50%,-50%);
+    transition: width 0.38s ease, height 0.38s ease, background 0.28s ease, opacity 0.2s ease;
+}
+
+#cur-dot.hov {
+    width: 11px;
+    height: 11px;
+    box-shadow: 0 0 12px 4px rgba(217,35,45,0.5);
+}
+
+#cur-ring.hov {
+    width: 64px;
+    height: 64px;
+    background: rgba(217,35,45,0.09);
+    box-shadow: 0 0 20px 3px rgba(217,35,45,0.3);
+}
+/* ─── HEADER ─── */
+/* Update your existing .main-header block */
+.main-header{
+    position:fixed;
+    top:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(0);
+    width:90%;
+    max-width:1400px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px); /* Elite Safari Support */
+    border:1px solid var(--border-light);
+    border-radius:100px;
+    padding:16px 24px 16px 40px;
+    z-index:1000;
+    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
+}
+
+/* Add this new state directly below it */
+.main-header.hidden {
+    transform:translateX(-50%) translateY(-150%);
+}
+.nav-wrapper{display:flex;justify-content:space-between;align-items:center;}
+.logo{font-family:var(--font-sans);font-weight:900;font-size:1.6rem;letter-spacing:1px;color:#fff;}
+.logo span{color:var(--red);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:#a0a0a0;font-size:.9rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:var(--transition);}
+.nav-links a:hover,.nav-links a.active-nav{color:#fff;}
+.btn-audit{background:#fff;color:#050505;font-weight:800;font-size:.8rem;padding:14px 28px;border-radius:40px;text-transform:uppercase;transition:var(--transition);}
+.btn-audit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,255,255,.2);}
+
+/* ─── BUTTONS ─── */
+.btn-primary{background:var(--red);color:#fff;padding:18px 40px;font-family:var(--font-sans);font-size:14px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;border:none;display:inline-flex;align-items:center;gap:10px;transition:var(--transition);border-radius:2px;box-shadow:0 10px 30px rgba(217,35,45,.3);}
+.btn-primary:hover{background:#fff;color:var(--charcoal);transform:translateY(-4px);box-shadow:0 20px 40px rgba(255,255,255,.2);}
+
+/* ─── HERO (Visual First) ─── */
+/* ─── HERO (Visual First) ─── */
+.services-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #050505;
+    overflow: hidden;
+    text-align: center;
+    padding-top: 140px; /* Added buffer for the fixed header */
+    padding-bottom: 80px;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.4;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, transparent 0%, #050505 100%);}
+.hero-inner{position:relative;z-index:5;max-width:900px;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(217,35,45,.4);padding:8px 18px;border-radius:40px;margin-bottom:36px;animation:fadeUp .8s ease .2s forwards;opacity:0;}
+.hero-tag-dot{width:6px;height:6px;background:var(--red);border-radius:50%;}
+.hero-tag span{font-size:12px;font-weight:700;letter-spacing:.15em;color:#fff;text-transform:uppercase;}
+.hero-h1{font-family:var(--font-display);font-size:clamp(70px,10vw,160px);letter-spacing:.02em;line-height:.85;color:#fff;margin-bottom:24px;animation:fadeUp .9s ease .35s forwards;opacity:0;}
+.hero-h1 .red-word{color:var(--red);}
+.hero-sub{font-size:clamp(18px,2vw,24px);color:#ccc;line-height:1.6;font-weight:300;margin-bottom:44px;animation:fadeUp .8s ease .5s forwards;opacity:0;}
+.hero-ctas{animation:fadeUp .8s ease .65s forwards;opacity:0;}
+
+/* ─── STICKY SERVICE NAV (DYNAMIC) ─── */
+.services-nav-sticky {
+    position: sticky;
+    /* Falls back to 96px if JS hasn't fired yet, but driven dynamically */
+    top: var(--nav-clearance, 96px); 
+    background: rgba(5,5,5,.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    border-top: 1px solid rgba(255,255,255,.03);
+    z-index: 900;
+    transition: top 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Snaps to the very top when scrolling down and main header hides */
+.services-nav-sticky.flush {
+    top: 0; 
+}
+
+.sn-inner{display:flex;align-items:center;justify-content:space-between;overflow-x:auto;scrollbar-width:none;}
+.sn-inner::-webkit-scrollbar{display:none;}
+/* ─── STICKY NAV TYPOGRAPHY UPGRADE ─── */
+.sn-item {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Slightly increased breathing room */
+    padding: 24px 12px;
+    font-family: var(--font-sans);
+    font-size: 14px; /* Bumped up 1px for effortless reading */
+    font-weight: 600; /* Dropped from 700 to 600 to remove chunkiness */
+    letter-spacing: 0.1em; /* Refined tracking for premium feel */
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55); /* Premium translucent silver - perfectly readable */
+    white-space: nowrap;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    border-bottom: 2px solid transparent;
+}
+
+.sn-num {
+    font-family: var(--font-display);
+    font-size: 22px; /* Slightly larger for better architectural anchoring */
+    color: rgba(255, 255, 255, 0.35); /* Visible, structural, but secondary */
+    transition: color 0.4s cubic-bezier(0.16,1,0.3,1);
+    transform: translateY(-1px); /* Optical baseline alignment */
+}
+
+/* Hover & Active States remain punchy and dominant */
+.sn-item:hover, .sn-item.active {
+    color: #ffffff; 
+    border-bottom-color: var(--red);
+}
+
+.sn-item:hover .sn-num, .sn-item.active .sn-num {
+    color: var(--red);
+}
+/* ─── PREMIUM SERVICE SECTIONS ─── */
+.premium-section{padding:140px 0;position:relative;overflow:hidden;}
+.bg-dark{background:#050505; color:#fff;}
+.bg-charcoal{background:#111111; color:#fff;}
+.bg-light{background:#ffffff; color:var(--charcoal);}
+.bg-offwhite{background:#f7f7f7; color:var(--charcoal);}
+
+.split-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.split-layout.reverse{direction:rtl;}
+.split-layout.reverse > *{direction:ltr;}
+
+.visual-box{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 80px rgba(0,0,0,.4);}
+.visual-box img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s cubic-bezier(.16,1,.3,1);}
+.visual-box:hover img{transform:scale(1.05);}
+
+.text-box{max-width:550px;}
+.section-num-pill{display:inline-block;font-family:var(--font-sans);font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);border:1px solid rgba(217,35,45,.3);padding:8px 20px;border-radius:40px;margin-bottom:30px;}
+.huge-heading{font-family:var(--font-display);font-size:clamp(60px,7vw,110px);line-height:.85;letter-spacing:.02em;margin-bottom:30px;text-transform:uppercase;}
+.huge-heading .red{color:var(--red);}
+.clean-desc{font-size:22px;line-height:1.6;font-weight:300;}
+.bg-dark .clean-desc, .bg-charcoal .clean-desc{color:#cccccc;}
+.bg-light .clean-desc, .bg-offwhite .clean-desc{color:#555555;}
+
+/* ==========================================================================
+   MILLION-DOLLAR EDITORIAL SUB-CARDS (IMAGE + TEXT)
+   ========================================================================== */
+
+.sub-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 80px;
+}
+
+/* ─── 1. CORE CARD ARCHITECTURE (CHARCOAL + WHITE BS) ─── */
+.sub-card {
+    /* The Charcoal Black Background */
+    background: #111111; 
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    /* The "White BS": A crisp white inset bevel + ambient white outer glow */
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 12px 32px rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.sub-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3);
+    /* Intensified White Shadow on Hover */
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 24px 48px rgba(255, 255, 255, 0.08);
+}
+
+/* ─── 2. EDITORIAL IMAGE MEDIA BLOCK ─── */
+.sub-card-media {
+    width: 100%;
+    height: 180px; /* Perfect 16:9 cinematic crop */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sub-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+.sub-card:hover .sub-card-media img {
+    transform: scale(1.08); /* Slow, expensive zoom effect */
+}
+
+/* Float the icon elegantly over the image */
+.sub-card-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.sub-card:hover .sub-card-icon {
+    background: var(--red);
+    border-color: var(--red);
+    transform: scale(1.05);
+}
+
+.sub-card-icon svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+
+/* ─── 3. TEXT & BUTTON CONTENT WRAPPER ─── */
+.sub-card-content {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.sub-card-content h3 { 
+    font-size: 17px; 
+    font-weight: 700; 
+    letter-spacing: 0.1em; 
+    text-transform: uppercase; 
+    margin-bottom: 12px; 
+    color: #ffffff; 
+}
+
+.sub-card-content p { 
+    font-size: 15px; 
+    color: rgba(255,255,255,0.65); 
+    font-weight: 400; 
+    line-height: 1.6; 
+    flex-grow: 1; 
+    margin-bottom: 32px;
+}
+
+/* ─── 4. THE BILLION-DOLLAR ACTION BUTTON (CENTERED) ─── */
+.sub-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 16px 28px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    align-self: center; /* ◄◄ THIS IS THE FIX ◄◄ */
+    position: relative;
+    overflow: hidden; 
+    z-index: 1;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.4s ease;
+}
+
+/* The Liquid Sweep Animation Element */
+.sub-card-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    /* By default, it is collapsed to the right */
+    transform: scaleX(0);
+    transform-origin: right; 
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+}
+
+.sub-card-btn svg {
+    width: 15px;
+    height: 15px;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* HOVER STATES (THE TRIGGER) */
+.sub-card:hover .sub-card-btn {
+    border-color: var(--red);
+    box-shadow: 0 16px 32px rgba(217,35,45,0.35); /* Ambient red glow */
+    transform: translateY(-2px) scale(1.02); /* Slight 3D lift & pop */
+}
+
+.sub-card:hover .sub-card-btn::before {
+    /* Instantly switches origin to left, and scales fluidly to 100% */
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.sub-card:hover .sub-card-btn svg {
+    transform: translateX(6px); /* Arrow glides forward */
+}
+
+
+/* ─── 5. LIGHT THEME (THE ARCHITECTURAL SEPARATION) ─── */
+.bg-light .sub-card, .bg-offwhite .sub-card { 
+    /* The Ceramic Gradient: Microscopic contrast against the white section */
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%); 
+    /* A crisp, undeniable 1px structural perimeter */
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    box-shadow: 
+        0 2px 6px rgba(0,0,0,0.04),
+        0 24px 60px rgba(0,0,0,0.08); 
+}
+
+.bg-light .sub-card:hover, .bg-offwhite .sub-card:hover { 
+    background: #ffffff; 
+    border-color: rgba(217,35,45,0.4); 
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.04),
+        0 40px 80px rgba(0,0,0,0.12); 
+}
+
+.bg-light .sub-card-media { 
+    border-bottom-color: rgba(0,0,0,0.08); 
+}
+
+.bg-light .sub-card-icon { 
+    background: rgba(255,255,255,0.95); 
+    color: var(--red); 
+    border-color: rgba(0,0,0,0.1); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06); 
+}
+
+.bg-light .sub-card:hover .sub-card-icon { 
+    background: var(--red); 
+    color: #fff; 
+    border-color: var(--red);
+}
+
+.bg-light .sub-card-content h3, .bg-offwhite .sub-card-content h3 { 
+    color: var(--charcoal); 
+}
+
+.bg-light .sub-card-content p, .bg-offwhite .sub-card-content p { 
+    color: #666666; 
+}
+
+/* Light Theme overrides specifically for the Liquid Sweep Button */
+.bg-light .sub-card-btn, .bg-offwhite .sub-card-btn { 
+    color: var(--charcoal); 
+    border-color: rgba(0, 0, 0, 0.15); 
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.bg-light .sub-card-btn::before, .bg-offwhite .sub-card-btn::before {
+    background: var(--red); 
+}
+
+.bg-light .sub-card:hover .sub-card-btn, .bg-offwhite .sub-card:hover .sub-card-btn { 
+    /* Text seamlessly turns white as the red liquid sweeps behind it */
+    color: #ffffff; 
+    border-color: var(--red); 
+    box-shadow: 0 16px 32px rgba(217,35,45,0.25); 
+}
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{0%{opacity:0;transform:translateY(40px)}100%{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.16,1,.3,1);}
+.reveal.from-left{transform:translateX(-50px);}
+.reveal.from-right{transform:translateX(50px);}
+.reveal.scale{transform:scale(.95);}
+.reveal.is-visible{opacity:1!important;transform:none!important;}
+
+/* Staggered delays for sub-cards */
+.del-1 { transition-delay: 0.1s; }
+.del-2 { transition-delay: 0.2s; }
+.del-3 { transition-delay: 0.3s; }
+.del-4 { transition-delay: 0.4s; }
+
+/* ─── WHY & CTA ─── */
+.minimal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:80px;}
+.minimal-card{padding:40px;border:1px solid rgba(255,255,255,.05);border-radius:4px;background:rgba(255,255,255,.02);}
+.minimal-card h3{font-size:24px;font-family:var(--font-display);letter-spacing:.05em;color:var(--red);margin-bottom:16px;}
+.minimal-card p{font-size:16px;color:#aaa;}
+
+.final-cta{background:linear-gradient(135deg,#a00000 0%,#d9232d 100%);padding:140px 0;text-align:center;color:#fff;}
+.final-cta h2{font-family:var(--font-display);font-size:clamp(60px,8vw,120px);line-height:.85;margin-bottom:30px;}
+.fcta-btn{display:inline-block;background:#fff;color:var(--red);padding:20px 50px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;border-radius:2px;transition:all .3s ease;}
+.fcta-btn:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3);}
+
+.footer{background:#050505;padding:60px 0;text-align:center;border-top:1px solid rgba(255,255,255,.05);}
+.footer p{color:#555;font-size:14px;margin-top:20px;}
+
+
+
+
+/* ==========================================================================
+   THE ELITE DYNAMIC MODAL CSS
+   ========================================================================== */
+
+/* The Full-Screen Backdrop */
+.elite-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Open State */
+.elite-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* The Modal Box */
+.elite-modal-container {
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 40px 100px rgba(0, 0, 0, 0.9);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    position: relative;
+    /* Hide scrollbar for a clean look */
+    scrollbar-width: none; 
+}
+.elite-modal-container::-webkit-scrollbar { display: none; }
+
+.elite-modal-overlay.active .elite-modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.elite-modal-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+.elite-modal-close:hover {
+    background: var(--red);
+    border-color: var(--red);
+    transform: rotate(90deg);
+}
+.elite-modal-close svg { width: 20px; height: 20px; }
+
+/* Grid Layout */
+.elite-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+}
+
+/* Left Side: Media */
+.elite-modal-media {
+    position: relative;
+    overflow: hidden;
+}
+.elite-modal-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.elite-modal-icon {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    background: rgba(5,5,5,0.7);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--red);
+}
+.elite-modal-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+
+/* Right Side: Content */
+.elite-modal-content {
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-badge {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.elite-modal-content h2 {
+    font-size: 36px;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 24px;
+}
+
+.modal-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--red);
+    margin-bottom: 24px;
+}
+
+.modal-lead {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.modal-extended {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+.modal-extended ul { list-style: none; margin-top: 16px; }
+.modal-extended li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+.modal-extended li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--red); border-radius: 50%; }
+
+/* Modal CTA */
+.modal-fcta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--red);
+    color: #fff;
+    padding: 20px 40px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+.modal-fcta-btn svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+.modal-fcta-btn:hover { background: #fff; color: var(--charcoal); box-shadow: 0 16px 32px rgba(255,255,255,0.15); transform: translateY(-3px); }
+.modal-fcta-btn:hover svg { transform: translateX(6px); }
+
+
+
+/* ==========================================================================
+   ELITE CONTACT FORM & FLOATING LABELS
+   ========================================================================== */
+.contact-form-wrapper {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 50px;
+    border-radius: 8px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.elite-form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: #ffffff;
+    outline: none;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    resize: none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-bottom-color: var(--red);
+    box-shadow: 0 1px 0 var(--red);
+}
+
+/* Floating Label Mechanics */
+.input-group label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+.input-group input:focus ~ label,
+.input-group textarea:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group textarea:not(:placeholder-shown) ~ label {
+    top: -18px;
+    font-size: 10px;
+    color: var(--red);
+}
+
+/* Automated Target Field Styling */
+.target-group input {
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: default !important; /* Forces custom cursor */
+}
+
+.target-group .lock-icon {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    color: rgba(255, 255, 255, 0.2);
+}
+.target-group .lock-icon svg { width: 16px; height: 16px; }
+
+/* The JS Pulse Animation when Auto-Filled */
+@keyframes autoFillPulse {
+    0% { box-shadow: 0 1px 0 rgba(217,35,45,0); border-bottom-color: rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 4px 12px rgba(217,35,45,0.4); border-bottom-color: var(--red); }
+    100% { box-shadow: 0 1px 0 rgba(217,35,45,0); border-bottom-color: rgba(255,255,255,0.2); }
+}
+.pulse-glow input {
+    animation: autoFillPulse 1.5s ease-out;
+}
+
+/* The Form Submit Button */
+.form-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 18px 40px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 10px;
+    transition: all 0.4s ease;
+}
+
+.form-submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: right; 
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+}
+
+.form-submit-btn svg { width: 16px; height: 16px; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+
+.form-submit-btn:hover {
+    border-color: var(--red);
+    box-shadow: 0 20px 40px rgba(217,35,45,0.3);
+}
+
+.form-submit-btn:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.form-submit-btn:hover svg { transform: translateX(6px); }
+
+
+/* ==========================================================================
+   CUSTOM GLASS SELECT ENGINE (DUAL-FUNCTION)
+   ========================================================================== */
+.target-group {
+    position: relative;
+    cursor: pointer;
+}
+
+/* The visible trigger box */
+.custom-select-trigger {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--red);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.custom-select-trigger .chevron-icon {
+    width: 18px;
+    height: 18px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Permanently float the label since this always has a value */
+.target-group .active-label {
+    top: -18px;
+    font-size: 10px;
+    color: var(--red);
+}
+
+/* Open State Trigger */
+.target-group.open .custom-select-trigger {
+    border-bottom-color: var(--red);
+}
+.target-group.open .chevron-icon {
+    transform: rotate(180deg);
+    color: var(--red);
+}
+
+/* The Dropdown Menu Panel */
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--red) transparent;
+}
+
+.target-group.open .custom-select-options {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Individual Options */
+.custom-option {
+    padding: 14px 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: background 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+}
+
+.custom-option:hover, .custom-option.active {
+    background: rgba(217,35,45,0.1);
+    color: #ffffff;
+    padding-left: 26px; /* Smooth slide effect on hover */
+}
+
+/* Update Pulse Animation to target the new trigger */
+.pulse-glow .custom-select-trigger {
+    animation: autoFillPulse 1.5s ease-out;
+}
+
+
+
+
+/* ==========================================================================
+   THE KINETIC PROCESS TRACK (BILLION-DOLLAR UX)
+   ========================================================================== */
+.process-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* 1. The Central Track */
+.process-track {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.process-line-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.05); /* The empty track */
+}
+
+.process-line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%; /* Driven by JS scroll */
+    background: var(--red);
+    box-shadow: 0 0 15px 2px rgba(217,35,45,0.6); /* The Laser Glow */
+    transition: height 0.1s linear; /* Buttery smooth scrub */
+}
+
+/* 2. The Steps Layout */
+.process-step {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+    opacity: 0.4; /* Dimmed by default */
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.process-step:last-child { margin-bottom: 0; }
+
+.process-step.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* The Glowing Nodes */
+.process-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #111;
+    border: 3px solid rgba(255,255,255,0.1);
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+.process-step.active .process-dot {
+    background: var(--red);
+    border-color: #fff;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 20px 4px rgba(217,35,45,0.4);
+}
+
+/* 3. The Matte Obsidian Cards (Premium Upgrade) */
+.process-card {
+    width: calc(50% - 60px);
+    background: #070707; /* Solid pitch black, no transparent glass */
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid rgba(255, 255, 255, 0.04); /* Will turn red on active */
+    padding: 40px;
+    border-radius: 4px; /* Sharper corners for a structural look */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.5s ease;
+}
+
+.process-step.left { justify-content: flex-start; }
+.process-step.right { justify-content: flex-end; }
+
+.process-step.active .process-card {
+    background: #000000;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-top-color: var(--red); /* Sharp red accent line from your image */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    transform: translateY(-4px);
+}
+
+/* Internal Card Typography */
+.p-bg-num {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    font-family: var(--font-display);
+    font-size: 160px; /* Made the numbers massive to match reference */
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.02);
+    z-index: 0;
+    pointer-events: none;
+    transition: color 0.5s ease;
+}
+.process-step.active .p-bg-num { color: rgba(255, 255, 255, 0.04); }
+
+.p-content { position: relative; z-index: 1; }
+
+.p-phase {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.process-card h3 {
+    font-size: 28px;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    color: #fff;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.process-card p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+    transition: color 0.5s ease;
+}
+.process-step.active .process-card p { color: rgba(255,255,255,0.7); }
+
+/* ==========================================================================
+   PROCESS TRACK: WHITE BACKGROUND & OBSIDIAN CARDS
+   ========================================================================== */
+
+/* 1. Track Adjustments for White Background */
+.bg-light .process-line-bg {
+    background: rgba(0, 0, 0, 0.08); /* Darkens the empty track so it is visible on white */
+}
+
+.bg-light .process-dot {
+    background: #ffffff; /* Resting node is clean white */
+    border-color: rgba(0, 0, 0, 0.15); /* Subtle dark border */
+}
+
+.bg-light .process-step.active .process-dot {
+    background: var(--red); 
+    border-color: var(--red);
+    box-shadow: 0 0 20px 4px rgba(217,35,45,0.4);
+}
+
+/* 2. Lock the Cards to Matte Obsidian */
+.bg-light .process-card {
+    background: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    border-top: 1px solid transparent; 
+    /* Softer, wider shadow for white backgrounds to prevent muddiness */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
+}
+
+.bg-light .process-step.active .process-card {
+    background: #000000;
+    border-color: rgba(0, 0, 0, 0.3);
+    border-top-color: var(--red); /* The sharp red accent line */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* 3. Protect Typography inside the Black Cards */
+/* Since .bg-light forces text to charcoal, we must force these back to white */
+.bg-light .process-card h3 { 
+    color: #ffffff; 
+}
+
+.bg-light .process-card p { 
+    color: rgba(255, 255, 255, 0.5); 
+}
+
+.bg-light .process-step.active .process-card p { 
+    color: rgba(255, 255, 255, 0.8); 
+}
+
+.bg-light .p-bg-num { 
+    color: rgba(255, 255, 255, 0.02); 
+}
+
+.bg-light .process-step.active .p-bg-num { 
+    color: rgba(255, 255, 255, 0.05); 
+}
+
+
+/* ==========================================================================
+   PROCESS TRACK: ULTRA-MINIMALIST OBSIDIAN BARS
+   ========================================================================== */
+
+/* Reshape the card into a sleek, horizontal bar */
+.process-card.slim-card {
+    padding: 32px 40px; /* Tighter vertical padding */
+    display: flex;
+    align-items: center; /* Vertically centers the content */
+}
+
+/* Adjust the massive background numbers for the slimmer card */
+.process-card.slim-card .p-bg-num {
+    font-size: 130px;
+    bottom: -20px;
+    right: 15px;
+    letter-spacing: -0.05em; /* Tighter kerning makes it look more modern */
+}
+
+/* Typography Upgrades */
+.process-card.slim-card .p-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.process-card.slim-card .p-phase {
+    margin-bottom: 6px; /* Pulled tighter to the heading */
+}
+
+.process-card.slim-card h3 {
+    margin-bottom: 0; /* Removed bottom margin since there is no paragraph */
+    font-size: 34px; /* Dramatically increased size for maximum authority */
+    line-height: 1;
+    transition: letter-spacing 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* The Million-Dollar Micro-Interaction */
+.process-step.active .process-card.slim-card h3 {
+    /* When the laser hits, the text slightly expands to command attention */
+    letter-spacing: 0.08em; 
+}
+
+/* Mobile Adjustments for the slim bars */
+@media(max-width: 768px) {
+    .process-card.slim-card {
+        padding: 24px 30px;
+    }
+    .process-card.slim-card h3 {
+        font-size: 28px;
+    }
+    .process-card.slim-card .p-bg-num {
+        font-size: 100px;
+        bottom: -15px;
+        right: 10px;
+    }
+}
+/* 4. Mobile Responsiveness: Shift line to the left */
+@media(max-width: 768px) {
+    .process-track { left: 20px; transform: none; }
+    .process-dot { left: 20px; }
+    .process-step { justify-content: flex-end; margin-bottom: 40px; }
+    .process-card { width: calc(100% - 60px); padding: 30px 24px; }
+}
+
+@media(max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; gap: 36px; }
+    .contact-form-wrapper { padding: 40px 24px; }
+}
+
+/* ==========================================================================
+   PROCESS TRACK: BILLION-DOLLAR CIRCULAR ORBITS
+   ========================================================================== */
+
+/* 1. Continuous Animation Keyframes */
+@keyframes spinOrbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes continuousLevitate {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); } /* Smooth, slow breathing effect */
+}
+
+/* 2. The Perfect Circle Geometry */
+.process-card.circle-card {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: transparent; /* Background is handled by pseudo-element */
+    border: none; /* Removing standard borders for the gradient trick */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin: 0 50px; /* Space from the central laser track */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    /* The Endless Levitation */
+    animation: continuousLevitate 6s ease-in-out infinite;
+}
+
+/* 3. The Spinning Conic Edge (The Orbiting Light) */
+.process-card.circle-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Creates the border thickness */
+    border-radius: 50%;
+    /* A sharp beam of red light fading into transparency */
+    background: conic-gradient(from 0deg, transparent 0%, transparent 60%, var(--red) 100%);
+    z-index: -2;
+    animation: spinOrbit 4s linear infinite;
+    opacity: 0.3; /* Dim while resting */
+    transition: opacity 0.5s ease, background 0.5s ease;
+}
+
+/* 4. The Obsidian Core Mask */
+.process-card.circle-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px; /* Exposes the spinning edge underneath */
+    background: #0a0a0a;
+    border-radius: 50%;
+    z-index: -1;
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* 5. Typography Alignment for Circles */
+.process-card.circle-card .p-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.process-card.circle-card .p-phase {
+    font-size: 10px;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.5s ease;
+}
+
+.process-card.circle-card h3 {
+    font-size: 32px;
+    margin-bottom: 0;
+    transition: letter-spacing 0.5s ease, text-shadow 0.5s ease;
+}
+
+/* 6. The Kinetic Interaction (When Laser Hits) */
+.process-step.active .process-card.circle-card::before {
+    opacity: 1; /* Orbiting light intensifies */
+    background: conic-gradient(from 0deg, transparent 0%, transparent 30%, var(--red) 100%);
+}
+
+.process-step.active .process-card.circle-card::after {
+    background: #000000; /* Core drops to pure black */
+    box-shadow: inset 0 0 40px rgba(217, 35, 45, 0.05); /* Very subtle internal red ambient glow */
+}
+
+.process-step.active .process-card.circle-card .p-phase {
+    color: var(--red); /* Sub-text illuminates */
+}
+
+.process-step.active .process-card.circle-card h3 {
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Text glows slightly */
+}
+
+/* 7. Mobile Adjustments for Circles */
+@media(max-width: 768px) {
+    .process-card.circle-card {
+        width: 220px;
+        height: 220px;
+        margin: 0 0 0 40px; /* Align strictly to the right of the mobile track */
+    }
+    .process-card.circle-card h3 {
+        font-size: 24px;
+    }
+}
+
+/* ==========================================================================
+   THE APEX RETURN BUTTON (MAGNETIC UX)
+   ========================================================================== */
+.apex-return-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* High z-index, but mathematically below your 9999999 custom cursor */
+    z-index: 99990; 
+    opacity: 0; /* Invisible by default */
+    pointer-events: none;
+    transform: translateY(20px) scale(0.9); /* Sits slightly down */
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    cursor: pointer;
+}
+
+/* Activated by JS when scrolled */
+.apex-return-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+.apex-return-btn svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.4s ease;
+}
+
+/* Hover Physics: Ignites the Orb */
+.apex-return-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    box-shadow: 0 10px 30px rgba(217,35,45,0.4);
+    transform: translateY(-4px) scale(1.05); /* Lifts up slightly */
+}
+
+
+/* ==========================================================================
+   EXECUTIVE RETURN BUTTON (SLEEK PILL DESIGN)
+   ========================================================================== */
+.executive-return-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0 100px 0; /* Creates perfect breathing room before the footer */
+    background: transparent;
+}
+
+.executive-return-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding: 18px 40px;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* The Liquid Sweep Element */
+.executive-return-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+}
+
+.executive-return-btn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ─── HOVER PHYSICS ─── */
+.executive-return-btn:hover {
+    border-color: var(--red);
+    box-shadow: 0 15px 40px rgba(217,35,45,0.4);
+    transform: translateY(-3px); /* Gentle levitation */
+}
+
+.executive-return-btn:hover::before {
+    transform-origin: left;
+    transform: scaleX(1); /* Liquid red sweeps in from the left */
+}
+
+.executive-return-btn:hover svg {
+    transform: translateX(-6px); /* Arrow glides backward indicating "Return" */
+}
+
+/* Continuous Kinetic Arrow Animation */
+@keyframes shootUp {
+    0% { transform: translateY(0); opacity: 1; }
+    40% { transform: translateY(-15px); opacity: 0; } /* Shoots up & fades */
+    50% { transform: translateY(15px); opacity: 0; } /* Teleports to bottom */
+    100% { transform: translateY(0); opacity: 1; } /* Slides back to center */
+}
+
+.apex-return-btn:hover svg {
+    animation: shootUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .apex-return-btn {
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Responsive Adjustments */
+@media(max-width: 900px) {
+    .elite-modal-grid { grid-template-columns: 1fr; }
+    .elite-modal-media { height: 250px; }
+    .elite-modal-content { padding: 40px 30px; }
+}
+
+@media(max-width:1200px){
+    .sub-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:1024px){
+    .split-layout, .split-layout.reverse{grid-template-columns:1fr; direction:ltr; text-align:center;}
+    .text-box{margin:0 auto;}
+    .minimal-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+}
+@media(max-width:768px){
+    .sub-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="social-sidebar open" id="socialSidebar">
+  <button class="toggle-btn" id="toggleBtn" aria-label="Toggle sidebar">
+    <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+  <div class="social-links" id="socialLinks">
+    <a href="https://wa.me/YOUR_NUMBER" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+    <a href="mailto:your@email.com" class="social-btn email-btn" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <polyline points="22,4 12,13 2,4"></polyline>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- ══════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════ -->
+<header class="main-header" id="mainHeader">
+    <nav class="container nav-wrapper">
+        <a href="index.html" class="logo">ECOMM<span>DOTS</span></a>
+        <ul class="nav-links">
+            <li><a href="#account-management">Services</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <a href="#contact" class="btn-audit">BOOK FREE AUDIT</a>
+    </nav>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+<section class="services-hero">
+    <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80" alt="Premium Agency Workspace">
+    </div>
+    <div class="container hero-inner">
+        <div class="hero-tag">
+            <div class="hero-tag-dot"></div>
+            <span>Elite Amazon Growth Partners</span>
+        </div>
+        <h1 class="hero-h1">WE BUILD <br><span class="red-word">EMPIRES.</span></h1>
+        <p class="hero-sub">No fluff. No technical jargon. Just relentless, visual-first strategies designed to dominate your market share and maximize your profit.</p>
+        <div class="hero-ctas">
+            <a href="#contact" class="btn-primary">Claim Your Market Share</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     STICKY NAV
+══════════════════════════════════════════════════ -->
+<nav class="services-nav-sticky" id="servicesNav">
+    <div class="container sn-inner">
+        <a class="sn-item active" href="#account-management"><span class="sn-num">01</span> Account</a>
+        <a class="sn-item" href="#ppc-advertising"><span class="sn-num">02</span> Advertising</a>
+        <a class="sn-item" href="#creative-studio"><span class="sn-num">03</span> Creative</a>
+        <a class="sn-item" href="#sourcing"><span class="sn-num">04</span> Sourcing</a>
+        <a class="sn-item" href="#account-health"><span class="sn-num">05</span> Protection</a>
+    </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+     01 — ACCOUNT MANAGEMENT
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-light" id="account-management">
+    <div class="container">
+        <div class="split-layout">
+            <div class="visual-box reveal scale">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80" alt="Account Management">
+            </div>
+            <div class="text-box reveal from-right">
+                <div class="section-num-pill">01 &mdash; Management</div>
+                <h2 class="huge-heading">TOTAL <br><span class="red">OWNERSHIP.</span></h2>
+                <p class="clean-desc">We take absolute control of your Amazon presence. We optimize the levers, protect the brand, and scale the revenue while you focus entirely on the big picture.</p>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             01 — ACCOUNT MANAGEMENT (MILLION DOLLAR GRID)
+        ══════════════════════════════════════════════════ -->
+        <div class="sub-grid">
+            
+            <!-- CARD 1: Brand Strategy -->
+            <div class="sub-card reveal del-1">
+                <!-- Media Wrapper: Cinematic Image & Floating Icon -->
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Brand Strategy">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    </div>
+                </div>
+                
+                <!-- Content Wrapper: Typography, Modal Data, & Action Pill -->
+                <div class="sub-card-content">
+                    <h3>Brand Strategy</h3>
+                    <p>Architecting multi-year roadmaps for sustainable category dominance.</p>
+                    
+                    <!-- DYNAMIC MODAL DATA (Invisible on page, injected into pop-up) -->
+                    <div class="hidden-details" style="display:none;">
+                        <p>Our strategy phase involves a complete teardown of your current market positioning. We analyze competitor weaknesses and build a multi-year roadmap to relentlessly capture their market share.</p>
+                        <ul>
+                            <li>Total Addressable Market (TAM) Expansion</li>
+                            <li>Competitor Keyword Gap Identification</li>
+                            <li>Pricing & Margin Restructuring</li>
+                            <li>Visual Brand Positioning & Identity Mapping</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Explore Strategy 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: Inventory Mgmt -->
+            <div class="sub-card reveal del-2">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8c73875062?auto=format&fit=crop&w=600&q=80" alt="Inventory Management">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Inventory Mgmt</h3>
+                    <p>Precision forecasting to ensure zero stockouts and optimized IPI scores.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Stockouts kill momentum. Overstock kills cash flow. We deploy algorithmic forecasting models that dictate exactly when to manufacture, when to ship, and how to maintain a perfect IPI score with Amazon.</p>
+                        <ul>
+                            <li>Predictive Restock Modeling (30/60/90 Day)</li>
+                            <li>FBA Capacity Limit Optimization</li>
+                            <li>Stranded Inventory Recovery</li>
+                            <li>3PL Buffer Strategy Implementation</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Optimize Stock 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 3: SEO & Listing -->
+            <div class="sub-card reveal del-3">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="SEO & Listing">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>SEO & Listing</h3>
+                    <p>A9-optimized copy and backend architecture engineered for organic rank.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>We do not just write copy; we engineer search relevancy. By reverse-engineering Amazon's A9 algorithm, we weave hyper-relevant search terms into sales-driven copywriting that converts human buyers while satisfying the search engine.</p>
+                        <ul>
+                            <li>Deep-Dive Search Term Isolation</li>
+                            <li>Title & Bullet Algorithm Structuring</li>
+                            <li>Backend Search Node & Alt-Text Optimization</li>
+                            <li>Continuous A/B Title Testing</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Rank Higher 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 4: Data & Analytics -->
+            <div class="sub-card reveal del-4">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=80" alt="Data & Analytics">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Data & Analytics</h3>
+                    <p>Custom executive dashboards cutting through the noise to real profit.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Revenue is vanity, margin is sanity. We strip away Amazon's confusing reporting structures and deliver custom, executive-level data dashboards. You will know exactly what your true Net Profit and TACoS are down to the individual SKU level.</p>
+                        <ul>
+                            <li>SKU-Level Profitability Tracking</li>
+                            <li>True Blended TACoS Measurement</li>
+                            <li>Advertising vs. Organic Ratio Analysis</li>
+                            <li>Monthly Executive Briefings</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        View Metrics 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     02 — PPC & ADVERTISING
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-charcoal" id="ppc-advertising">
+    <div class="container">
+        <div class="split-layout reverse">
+            <div class="visual-box reveal scale">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="PPC Advertising">
+            </div>
+            <div class="text-box reveal from-left">
+                <div class="section-num-pill">02 &mdash; Advertising</div>
+                <h2 class="huge-heading">ENGINEERED <br><span class="red">PROFIT.</span></h2>
+                <p class="clean-desc">We do not chase vanity metrics. Every campaign is surgically architected to maximize your return on ad spend and ruthlessly capture market share from competitors.</p>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             02 — PPC & ADVERTISING (MILLION DOLLAR GRID)
+        ══════════════════════════════════════════════════ -->
+        <div class="sub-grid">
+            
+            <!-- CARD 1: Keyword Targeting -->
+            <div class="sub-card reveal del-1">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80" alt="Keyword Targeting">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Keyword Targeting</h3>
+                    <p>Proprietary intelligence identifying high-intent, low-cost search terms.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>We deploy proprietary data-mining to uncover the exact search terms your competitors are ignoring. By targeting high-intent, low-competition keywords, we acquire customers at a fraction of the standard CPC.</p>
+                        <ul>
+                            <li>Long-Tail Search Term Isolation</li>
+                            <li>Automated Search Term Harvesting</li>
+                            <li>Aggressive Negative Keyword Pruning</li>
+                            <li>Intent-Based Keyword Clustering</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Target Buyers 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: Bid Scaling -->
+            <div class="sub-card reveal del-2">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=600&q=80" alt="Bid Scaling">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Bid Scaling</h3>
+                    <p>Algorithmic dayparting and bid adjustments driven by conversion velocity.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Bidding isn't set-and-forget. We utilize algorithmic pacing to increase your bids when conversion velocity is highest, and throttle spend when buyers are just browsing. This maximizes your return on ad spend (ROAS).</p>
+                        <ul>
+                            <li>Algorithmic Dayparting & Hourly Multipliers</li>
+                            <li>Top-of-Search Placement Optimization</li>
+                            <li>Rule-Based Velocity Scaling</li>
+                            <li>Strict CPC Threshold Management</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Scale ROAS 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 3: Campaign Arch -->
+            <div class="sub-card reveal del-3">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1432888117247-3682080dcb99?auto=format&fit=crop&w=600&q=80" alt="Campaign Architecture">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Campaign Arch</h3>
+                    <p>Granular structural separation of branded, offensive, and defensive ads.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>A chaotic ad console burns cash. We build highly segmented campaign architectures that allow for surgical budget control. We defend your brand territory while simultaneously launching offensive strikes on competitor ASINs.</p>
+                        <ul>
+                            <li>Single Keyword Ad Groups (SKAGs)</li>
+                            <li>Strict Brand vs. Non-Brand Isolation</li>
+                            <li>Defensive ASIN Targeting Moats</li>
+                            <li>Offensive Market-Share Capture Campaigns</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Build Structure 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 4: Profit Tracking -->
+            <div class="sub-card reveal del-4">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=600&q=80" alt="Profit Tracking">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Profit Tracking</h3>
+                    <p>Connecting ad spend directly to net margins, factoring COGS and fees.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Amazon's default reporting is designed to make you spend more. We integrate your true COGS to track profitability down to the penny. We ruthlessly cut wasted ad spend that generates top-line revenue but destroys bottom-line profit.</p>
+                        <ul>
+                            <li>True ROAS vs. Break-Even ACoS Tracking</li>
+                            <li>Advertising vs. Organic Ratio Control</li>
+                            <li>Unit-Level Net Profitability Margins</li>
+                            <li>Automated Wasted Spend Elimination</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Track Profit 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     03 — CREATIVE STUDIO
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-light" id="creative-studio">
+    <div class="container">
+        <div class="split-layout">
+            <div class="visual-box reveal scale">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1200&q=80" alt="Creative Studio">
+            </div>
+            <div class="text-box reveal from-right">
+                <div class="section-num-pill">03 &mdash; Creative</div>
+                <h2 class="huge-heading">VISUAL <br><span class="red">DOMINANCE.</span></h2>
+                <p class="clean-desc">Your product is only as good as it looks on screen. Our studio crafts scroll-stopping, editorial-grade visuals that command attention and convert instantly.</p>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             03 — CREATIVE STUDIO (MILLION DOLLAR GRID)
+        ══════════════════════════════════════════════════ -->
+        <div class="sub-grid">
+            
+            <!-- CARD 1: Listing Imagery -->
+            <div class="sub-card reveal del-1">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=600&q=80" alt="Listing Imagery">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Listing Imagery</h3>
+                    <p>High-contrast photography and infographics mapping to consumer psychology.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>We do not just take photos; we build visual sales funnels. Our creative studio maps out the exact psychological journey a buyer takes, addressing their objections and highlighting your UVP before they even read a word of text.</p>
+                        <ul>
+                            <li>Hero Image Click-Through Rate (CTR) Optimization</li>
+                            <li>Feature-Mapping Infographic Sequences</li>
+                            <li>Aspirational Lifestyle Contextualization</li>
+                            <li>Competitor Visual Teardowns</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        View Portfolio 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: A+ Content -->
+            <div class="sub-card reveal del-2">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80" alt="A+ Content">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>A+ Content</h3>
+                    <p>Premium immersive modules designed to neutralize objections and lift CVR.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Premium A+ Content serves as your digital storefront directly on the product detail page. We use immersive, editorial-style layouts to elevate your brand perception, justify premium pricing, and significantly increase conversion rates.</p>
+                        <ul>
+                            <li>Immersive Editorial Module Stacking</li>
+                            <li>Cross-Selling Comparison Matrix Charts</li>
+                            <li>Mobile-First Visual Architecture</li>
+                            <li>Brand Story & Heritage Integration</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Enhance Brand 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 3: Video Ads -->
+            <div class="sub-card reveal del-3">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=600&q=80" alt="Video Ads">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Video Ads</h3>
+                    <p>Motion creatives engineered to capture the vital first 2 seconds of attention.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Motion stops the scroll. We produce high-converting Sponsored Brand Video ads and listing videos that hook the viewer in the critical first two seconds, demonstrating product value dynamically to drive impulse purchases.</p>
+                        <ul>
+                            <li>2-Second Visual Hook Engineering</li>
+                            <li>High-Fidelity 3D Product Rendering</li>
+                            <li>User-Generated Content (UGC) Integration</li>
+                            <li>Sponsored Brand Video (SBV) Deployment</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        See Motion 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 4: Storefront UI -->
+            <div class="sub-card reveal del-4">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1481481365942-8858d20fa678?auto=format&fit=crop&w=600&q=80" alt="Storefront UI">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Storefront UI</h3>
+                    <p>Cohesive brand ecosystems that build equity and increase basket size.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Your Amazon Storefront is your dedicated D2C environment within the marketplace. We design custom, shoppable ecosystems free of competitor ads, designed specifically to increase Average Order Value (AOV) and build brand equity.</p>
+                        <ul>
+                            <li>Multi-Page Categorization Navigation</li>
+                            <li>Dynamic Shoppable Image Curation</li>
+                            <li>Seasonal Campaign & Launch Overlays</li>
+                            <li>Brand Equity & Follower Growth Systems</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Build Store 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     04 — SOURCING & SUPPLY CHAIN
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-dark" id="sourcing">
+    <div class="container">
+        <div class="split-layout reverse">
+            <div class="visual-box reveal scale">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8c73875062?auto=format&fit=crop&w=1200&q=80" alt="Global Sourcing">
+            </div>
+            <div class="text-box reveal from-left">
+                <div class="section-num-pill">04 &mdash; Sourcing</div>
+                <h2 class="huge-heading">FLAWLESS <br><span class="red">LOGISTICS.</span></h2>
+                <p class="clean-desc">Margin lives in the supply chain. We connect you to reliable manufacturers, negotiate aggressively, and ensure every unit arrives on time and exactly to spec.</p>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════
+             04 — SOURCING & SUPPLY CHAIN (MILLION DOLLAR GRID)
+        ══════════════════════════════════════════════════ -->
+        <div class="sub-grid">
+            
+            <!-- CARD 1: Factory Audits -->
+            <div class="sub-card reveal del-1">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Factory Audits">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Factory Audits</h3>
+                    <p>Rigorous vetting of international suppliers and manufacturing licenses.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Never get burned by a bad supplier. We conduct boots-on-the-ground factory audits to ensure your manufacturing partners have the legitimate capacity, ethical compliance, and quality standards required to scale your empire.</p>
+                        <ul>
+                            <li>On-Site Facility Inspections</li>
+                            <li>Ethical Compliance & ISO Verification</li>
+                            <li>Production Capacity Stress-Testing</li>
+                            <li>Raw Material Sourcing Transparency</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Vet Suppliers 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: Cost Negotiation -->
+            <div class="sub-card reveal del-2">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1621504450181-5d356f61d307?auto=format&fit=crop&w=600&q=80" alt="Cost Negotiation">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Cost Negotiation</h3>
+                    <p>Aggressive procurement strategies securing 15-30% direct COGS reduction.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Every dollar saved in manufacturing is a dollar added to your bottom line. We leverage our agency's global buying power and native negotiators to restructure your pricing, drastically improving your profit margins.</p>
+                        <ul>
+                            <li>Volume Tier Contract Restructuring</li>
+                            <li>Payment Term Extensions (Net-30/60)</li>
+                            <li>Direct Cost of Goods (COGS) Reduction</li>
+                            <li>Packaging & Material Cost Optimization</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Cut Costs 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 3: Quality Control -->
+            <div class="sub-card reveal del-3">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=600&q=80" alt="Quality Control">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Quality Control</h3>
+                    <p>Pre-shipment inspections ensuring zero-defect arrivals at fulfillment centers.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>High defect rates destroy Amazon listings. We implement aggressive pre-shipment inspections (AQL standards) at the factory floor, ensuring bad batches are caught and remanufactured before they ever get loaded onto a container.</p>
+                        <ul>
+                            <li>AQL Standard Factory Floor Inspections</li>
+                            <li>Pre-Shipment Random Sample Testing</li>
+                            <li>Functionality & Tolerance Stress Tests</li>
+                            <li>Packaging & Drop Test Verification</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Ensure Quality 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 4: Freight Forwarding -->
+            <div class="sub-card reveal del-4">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?auto=format&fit=crop&w=600&q=80" alt="Freight Forwarding">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Freight Forwarding</h3>
+                    <p>End-to-end sea and air logistics optimized for speed and container pricing.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Logistics should be a competitive advantage, not a bottleneck. We manage end-to-end global freight forwarding, optimizing routes for speed and securing premium container pricing to keep your landed costs as low as possible.</p>
+                        <ul>
+                            <li>FCL & LCL Container Optimization</li>
+                            <li>Air-Freight Emergency Routing</li>
+                            <li>Seamless Customs Clearance Expediting</li>
+                            <li>3PL Buffer to FBA Drip-Feeding Strategy</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Ship Faster 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     05 — ACCOUNT HEALTH
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-offwhite" id="account-health">
+    <div class="container">
+        <div class="split-layout">
+            <div class="visual-box reveal scale">
+                <img src="https://images.unsplash.com/photo-1614064641913-a53f910ea1eb?auto=format&fit=crop&w=1200&q=80" alt="Account Protection">
+            </div>
+            <div class="text-box reveal from-right">
+                <div class="section-num-pill">05 &mdash; Protection</div>
+                <h2 class="huge-heading">IRONCLAD <br><span class="red">SECURITY.</span></h2>
+                <p class="clean-desc">Your account is your most valuable asset. We build the shield that keeps it clean, compliant, and protected from the automated threats that can erase years of work.</p>
+            </div>
+        </div>
+
+        <div class="sub-grid">
+            
+            <!-- CARD 1: Reinstatement -->
+            <div class="sub-card reveal del-1">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Reinstatement">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Reinstatement</h3>
+                    <p>Bulletproof Plans of Action delivered with emergency 24-hour turnaround.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>When Amazon pulls the plug, every hour costs you thousands. Our internal legal team crafts bulletproof Plans of Action (PoAs) and leverages internal escalations to bypass the bots and get your listings active immediately.</p>
+                        <ul>
+                            <li>Precise Root Cause Isolation</li>
+                            <li>Executive-Escalated Plans of Action</li>
+                            <li>ASIN-Level & Full Account Reinstatement</li>
+                            <li>Suspended Funds Recovery Protocol</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Recover Account 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: Hijack Defense -->
+            <div class="sub-card reveal del-2">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1510511459019-5d01974106ce?auto=format&fit=crop&w=600&q=80" alt="Hijack Defense">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Hijack Defense</h3>
+                    <p>Automated monitoring and rapid cease & desist issuance for rogue sellers.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Counterfeiters steal your Buy Box and destroy your reviews. We deploy 24/7 automated monitoring on your ASINs, immediately launching legal cease and desists and test-buy operations the moment a rogue seller attaches.</p>
+                        <ul>
+                            <li>24/7 Automated Listing Monitoring</li>
+                            <li>Rapid Cease & Desist Legal Issuance</li>
+                            <li>Expedited Test Buy Operations</li>
+                            <li>Amazon Transparency Program Enrollment</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Defend Listing 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 3: Policy Audits -->
+            <div class="sub-card reveal del-3">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Policy Audits">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Policy Audits</h3>
+                    <p>Proactive sweeps preventing automated enforcement actions before they hit.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Prevention is immensely cheaper than reinstatement. We run proactive monthly sweeps of your entire catalog, ensuring your backend attributes, copywriting, and imagery are 100% compliant with Amazon's ever-shifting Terms of Service.</p>
+                        <ul>
+                            <li>Comprehensive TOS Compliance Sweeps</li>
+                            <li>Backend Pesticide & Hazmat Keyword Checks</li>
+                            <li>Automated Listing Suppression Prevention</li>
+                            <li>Category-Specific Requirement Updates</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Audit Compliance 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 4: Brand Registry -->
+            <div class="sub-card reveal del-4">
+                <div class="sub-card-media">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80" alt="Brand Registry">
+                    <div class="sub-card-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                </div>
+                
+                <div class="sub-card-content">
+                    <h3>Brand Registry</h3>
+                    <p>Full enrollment and IP Accelerator management securing your legal moats.</p>
+                    
+                    <div class="hidden-details" style="display:none;">
+                        <p>Your intellectual property is your strongest asset on Amazon. We manage your full trademark lifecycle, utilizing Amazon's IP Accelerator to get you gated Brand Registry protection months faster than standard government timelines.</p>
+                        <ul>
+                            <li>Amazon IP Accelerator Fast-Tracking</li>
+                            <li>Complete Trademark Filing Assistance</li>
+                            <li>Project Zero & Transparency Enrollment</li>
+                            <li>Proactive A9 Content Protection Moats</li>
+                        </ul>
+                    </div>
+
+                    <a href="#contact" class="sub-card-btn">
+                        Secure Brand 
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     THE BILLION-DOLLAR PROCESS TRACK
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-light" id="process">
+    <div class="container" style="text-align: center; margin-bottom: 80px;">
+        <div class="section-num-pill">THE FRAMEWORK</div>
+        <h2 class="huge-heading">HOW WE BUILD <br><span class="red">EMPIRES.</span></h2>
+        <p class="clean-desc" style="max-width: 600px; margin: 0 auto; color: #aaa;">A relentless, four-phase kinetic architecture designed to strip away market inefficiencies and monopolize your category.</p>
+    </div>
+
+    <div class="container process-container">
+        <!-- The Kinetic Center Line -->
+        <div class="process-track" id="processTrack">
+            <div class="process-line-bg"></div>
+            <div class="process-line-fill" id="processLineFill"></div>
+        </div>
+
+        <!-- Step 01 -->
+        <div class="process-step left">
+            <div class="process-dot"></div>
+            <div class="process-card circle-card">
+                <div class="p-content">
+                    <span class="p-phase">Step 01</span>
+                    <h3>DEEP AUDIT</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 02 -->
+        <div class="process-step right">
+            <div class="process-dot"></div>
+            <div class="process-card circle-card">
+                <div class="p-content">
+                    <span class="p-phase">Step 02</span>
+                    <h3>STRATEGY</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 03 -->
+        <div class="process-step left">
+            <div class="process-dot"></div>
+            <div class="process-card circle-card">
+                <div class="p-content">
+                    <span class="p-phase">Step 03</span>
+                    <h3>EXECUTE</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 04 -->
+        <div class="process-step right">
+            <div class="process-dot"></div>
+            <div class="process-card circle-card">
+                <div class="p-content">
+                    <span class="p-phase">Step 04</span>
+                    <h3>OPTIMIZE</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 05 -->
+        <div class="process-step left">
+            <div class="process-dot"></div>
+            <div class="process-card circle-card">
+                <div class="p-content">
+                    <span class="p-phase">Step 05</span>
+                    <h3>SCALE</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     WHY US (Simplified)
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-dark" style="text-align:center;">
+    <div class="container">
+        <h2 class="huge-heading reveal">THE <span class="red">DIFFERENCE</span></h2>
+        <p class="clean-desc reveal" style="max-width:700px; margin:0 auto;">Most agencies optimize for their own metrics. We optimize for yours—profit, margin, and absolute market share.</p>
+        
+        <div class="minimal-grid reveal">
+            <div class="minimal-card">
+                <h3>01</h3>
+                <p>Former 7-Figure Sellers leading your strategy. We know what it takes to scale.</p>
+            </div>
+            <div class="minimal-card">
+                <h3>02</h3>
+                <p>Dedicated Account Teams. No rotating reps, just pure, focused execution.</p>
+            </div>
+            <div class="minimal-card">
+                <h3>03</h3>
+                <p>Performance-Linked Success. We don't win unless your brand is winning.</p>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <!-- ══════════════════════════════════════════════════
+        EXECUTIVE RETURN BUTTON (MINIMALIST & PREMIUM)
+    ══════════════════════════════════════════════════ -->
+    <div class="executive-return-wrapper">
+        <a href="index.html" class="executive-return-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>RETURN TO HOMEPAGE</span>
+        </a>
+    </div>
+
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════════════════ -->
+<section class="final-cta">
+    <div class="container reveal scale">
+        <h2>READY TO BUILD <br>YOUR EMPIRE?</h2>
+        <a href="#contact" class="fcta-btn">BOOK FREE AUDIT</a>
+    </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════
+     CONTACT SECTION (THE CONCIERGE)
+══════════════════════════════════════════════════ -->
+<section class="premium-section bg-dark" id="contact">
+    <div class="container">
+        <div class="split-layout">
+            
+            <!-- Left Side: Authority Text -->
+            <div class="text-box reveal from-left">
+                <div class="section-num-pill">INITIATE</div>
+                <h2 class="huge-heading">CLAIM <br><span class="red">YOUR</span><br>SPACE.</h2>
+                <p class="clean-desc" style="color: #ccc;">Stop leaving revenue on the table. Drop your details below and our executive team will orchestrate a custom teardown of your current architecture.</p>
+            </div>
+            
+            <!-- Right Side: Elite Glass Form -->
+            <div class="contact-form-wrapper reveal from-right">
+                <form id="eliteContactForm" class="elite-form">
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" id="name" required placeholder=" ">
+                            <label for="name">Full Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email" required placeholder=" ">
+                            <label for="email">Work Email</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="brand" required placeholder=" ">
+                        <label for="brand">Brand / Company URL</label>
+                    </div>
+
+                    <!-- The Dual-Function Concierge Field -->
+                    <div class="input-group target-group" id="targetGroup">
+                        <!-- Hidden input stores the actual value for form submission -->
+                        <input type="hidden" id="serviceSubject" name="serviceSubject" value="General Audit Request">
+                        
+                        <!-- Visual Select Box -->
+                        <div class="custom-select-trigger" id="customSelectTrigger">
+                            <span id="customSelectText">General Audit Request</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        
+                        <!-- Floating Label -->
+                        <label class="active-label">Targeted Protocol</label>
+
+                        <!-- The Glass Dropdown Menu -->
+                        <div class="custom-select-options" id="customSelectOptions">
+                            <div class="custom-option active" data-value="General Audit Request">General Audit Request</div>
+                            <div class="custom-option" data-value="Full Account Management">Full Account Management</div>
+                            <div class="custom-option" data-value="PPC & Advertising Audit">PPC & Advertising Audit</div>
+                            <div class="custom-option" data-value="Listing & SEO Optimization">Listing & SEO Optimization</div>
+                            <div class="custom-option" data-value="Creative Studio & A+">Creative Studio & A+</div>
+                            <div class="custom-option" data-value="Supply Chain & Sourcing">Supply Chain & Sourcing</div>
+                            <div class="custom-option" data-value="Account Reinstatement">Account Reinstatement</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="message" rows="3" required placeholder=" "></textarea>
+                        <label for="message">Current Monthly Revenue & Goals</label>
+                    </div>
+
+                    <button type="submit" class="form-submit-btn">
+                        REQUEST AUDIT
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                    
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="container">
+        <a href="index.html" class="logo">ECOMM<span style="color:var(--red)">DOTS</span></a>
+        <p>© 2026 Ecommdots. Built for brands that mean business.</p>
+    </div>
+</footer>
+
+
+
+<!-- ══════════════════════════════════════════════════
+     THE ELITE DYNAMIC MODAL
+══════════════════════════════════════════════════ -->
+<div class="elite-modal-overlay" id="eliteModal">
+    <div class="elite-modal-container">
+        <!-- Floating Close Button -->
+        <button class="elite-modal-close" id="modalClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        
+        <div class="elite-modal-grid">
+            <!-- Left Side: Dynamic Media -->
+            <div class="elite-modal-media">
+                <img id="modalImg" src="" alt="Service Image">
+                <div class="elite-modal-icon" id="modalIcon"></div>
+            </div>
+            
+            <!-- Right Side: Dynamic Content -->
+            <div class="elite-modal-content">
+                <div class="modal-badge">Elite Service Protocol</div>
+                <h2 id="modalTitle">Service Title</h2>
+                <div class="modal-divider"></div>
+                
+                <p class="modal-lead" id="modalLead">Short description goes here.</p>
+                
+                <!-- Extended Details will be injected here -->
+                <div class="modal-extended" id="modalExtended"></div>
+                
+                <!-- The Final CTA -->
+                <a href="#contact" class="modal-fcta-btn" id="modalActionBtn">
+                    INITIALIZE PROTOCOL
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     THE APEX RETURN (BILLION-DOLLAR BACK TO TOP)
+══════════════════════════════════════════════════ -->
+<button class="apex-return-btn" id="apexReturn" aria-label="Return to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+</button>
+<!-- ══════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════ -->
+<script>
+/* ════════════════════════════════════════════════════════════
+   01. ELITE CUSTOM CURSOR (Lerp Engine)
+   Upgraded from setTimeout to requestAnimationFrame for 120fps smoothness.
+   ════════════════════════════════════════════════════════════ */
+(() => {
+    const dot = document.getElementById('cur-dot');
+    const ring = document.getElementById('cur-ring');
+    if(!dot || !ring) return;
+    
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    
+    // 1. Instantly track the real mouse position
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX; 
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px'; 
+        dot.style.top = mouseY + 'px';
+    });
+    
+    // 2. Mathematically drag the ring behind it (Linear Interpolation)
+    const renderCursor = () => {
+        ringX += (mouseX - ringX) * 0.15; // The trailing speed (lower = slower)
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.left = ringX + 'px'; 
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(renderCursor);
+    };
+    requestAnimationFrame(renderCursor);
+
+    // 3. Hover States
+    const HOV = 'a, button, .visual-box, .sub-card';
+    document.addEventListener('mouseover', e => { 
+        if(e.target.closest(HOV)){ dot.classList.add('hov'); ring.classList.add('hov'); }
+    });
+    document.addEventListener('mouseout', e => { 
+        if(e.target.closest(HOV)){ dot.classList.remove('hov'); ring.classList.remove('hov'); }
+    });
+})();
+
+
+/* ════════════════════════════════════════════════════════════
+   02. DYNAMIC HEADER & SMART SCROLL ENGINE
+   Calculates perfect clearance and hides/reveals seamlessly.
+   ════════════════════════════════════════════════════════════ */
+const mainHeaderObj = document.getElementById('mainHeader');
+const stickyNavObj = document.getElementById('servicesNav');
+
+const sidebar = document.getElementById('socialSidebar');
+const toggleBtn = document.getElementById('toggleBtn');
+
+toggleBtn.addEventListener('click', () => {
+sidebar.classList.toggle('open');
+});
+
+const calculateClearance = () => {
+    if (!mainHeaderObj) return;
+    const exactClearance = mainHeaderObj.offsetHeight + 36;
+    document.documentElement.style.setProperty('--nav-clearance', `${exactClearance}px`);
+};
+
+window.addEventListener('DOMContentLoaded', calculateClearance);
+window.addEventListener('resize', calculateClearance);
+
+let lastScrollY = window.scrollY;
+
+// We throttle this using passive:true, and only update CSS classes (no expensive layout reads)
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    mainHeaderObj.style.background = currentScrollY > 50 ? 'rgba(5,5,5,.97)' : 'rgba(5,5,5,.85)';
+
+    if (currentScrollY > lastScrollY && currentScrollY > 200) {
+        mainHeaderObj.classList.add('hidden');
+        stickyNavObj.classList.add('flush');
+    } else {
+        mainHeaderObj.classList.remove('hidden');
+        stickyNavObj.classList.remove('flush');
+    }
+    lastScrollY = currentScrollY;
+}, {passive:true});
+
+
+/* ════════════════════════════════════════════════════════════
+   03. PERFORMANCE NAV OBSERVER (Replaces heavy scroll math)
+   Uses IntersectionObserver to watch when sections enter the screen.
+   ════════════════════════════════════════════════════════════ */
+const snItems = document.querySelectorAll('.sn-item');
+const serviceSections = document.querySelectorAll('.premium-section[id]');
+
+// Triggers when a section hits the middle of the screen
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            snItems.forEach(item => {
+                const targetId = item.getAttribute('href');
+                item.classList.toggle('active', targetId === '#' + entry.target.id);
+            });
+            
+            // Optional: Smoothly scroll the sticky nav horizontally if on mobile
+            const activeNav = document.querySelector(`.sn-item[href="#${entry.target.id}"]`);
+            if(activeNav && window.innerWidth <= 1024) {
+                activeNav.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+    });
+}, { rootMargin: "-40% 0px -40% 0px" });
+
+serviceSections.forEach(sec => navObserver.observe(sec));
+
+
+/* ════════════════════════════════════════════════════════════
+   04. REVEAL ANIMATIONS (Optimized)
+   ════════════════════════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { 
+        if(e.isIntersecting){ 
+            e.target.classList.add('is-visible'); 
+            revealObserver.unobserve(e.target); 
+        }
+    });
+}, { rootMargin: "0px 0px -50px 0px" }); // Triggers slightly before hitting the bottom
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ════════════════════════════════════════════════════════════
+   05. INTELLIGENT MODAL ENGINE
+   Extracts card data dynamically and triggers the overlay.
+   ════════════════════════════════════════════════════════════ */
+const eliteModal = document.getElementById('eliteModal');
+const modalClose = document.getElementById('modalClose');
+const modalActionBtn = document.getElementById('modalActionBtn');
+const body = document.body;
+
+// Elements inside the modal to populate
+const popImg = document.getElementById('modalImg');
+const popIcon = document.getElementById('modalIcon');
+const popTitle = document.getElementById('modalTitle');
+const popLead = document.getElementById('modalLead');
+const popExt = document.getElementById('modalExtended');
+
+// 1. Listen for clicks on ANY sub-card button
+document.querySelectorAll('.sub-card-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Find the parent card of the clicked button
+        const card = btn.closest('.sub-card');
+
+        // Extract the existing visible data
+        const imgSrc = card.querySelector('.sub-card-media img').src;
+        const iconSvg = card.querySelector('.sub-card-icon').innerHTML;
+        const title = card.querySelector('.sub-card-content h3').innerText;
+        const leadText = card.querySelector('.sub-card-content p').innerText;
+
+        // Check if the user added a hidden detailed div to this specific card
+        const detailedDiv = card.querySelector('.hidden-details');
+        
+        // If they did, use it. If not, use a premium default message.
+        const extendedHTML = detailedDiv 
+            ? detailedDiv.innerHTML 
+            : `<p>Deploy our proprietary framework to systematically capture market share, neutralize competitors, and scale revenue with algorithmic precision.</p>`;
+
+        // 2. Inject extracted data into the master modal
+        popImg.src = imgSrc;
+        popIcon.innerHTML = iconSvg;
+        popTitle.innerText = title;
+        popLead.innerText = leadText;
+        popExt.innerHTML = extendedHTML;
+
+        // Update the CTA button text inside the modal to match the card's button text
+        const btnText = btn.innerText.trim();
+        modalActionBtn.innerHTML = `${btnText} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
+        // 3. Trigger the animation and lock the background
+        eliteModal.classList.add('active');
+        body.style.overflow = 'hidden'; // Prevents scrolling while modal is open
+    });
+});
+
+// 4. Close Protocol & Smart Form Routing
+const closeEliteModal = () => {
+    eliteModal.classList.remove('active');
+    body.style.overflow = ''; // Restores background scroll
+};
+
+modalClose.addEventListener('click', closeEliteModal);
+
+eliteModal.addEventListener('click', (e) => {
+    if(e.target === eliteModal) closeEliteModal();
+});
+
+/* ════════════════════════════════════════════════════════════
+   06. DUAL-FUNCTION CONCIERGE ENGINE (MANUAL + AUTO)
+   ════════════════════════════════════════════════════════════ */
+const targetGroup = document.getElementById('targetGroup');
+const customSelectTrigger = document.getElementById('customSelectTrigger');
+const customSelectText = document.getElementById('customSelectText');
+const customSelectOptions = document.getElementById('customSelectOptions');
+const hiddenServiceInput = document.getElementById('serviceSubject');
+const allOptions = document.querySelectorAll('.custom-option');
+const contactSection = document.getElementById('contact');
+
+// --- A. MANUAL FUNCTIONALITY (The Custom Dropdown) ---
+
+// Toggle menu on click
+customSelectTrigger.addEventListener('click', () => {
+    targetGroup.classList.toggle('open');
+});
+
+// Handle Option Selection
+allOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const selectedValue = option.getAttribute('data-value');
+        
+        // 1. Update text and hidden input
+        customSelectText.innerText = selectedValue;
+        hiddenServiceInput.value = selectedValue;
+        
+        // 2. Update active state styles
+        allOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        
+        // 3. Close the dropdown
+        targetGroup.classList.remove('open');
+    });
+});
+
+// Close dropdown if user clicks outside of it
+document.addEventListener('click', (e) => {
+    if (!targetGroup.contains(e.target)) {
+        targetGroup.classList.remove('open');
+    }
+});
+
+
+// --- B. AUTOMATED FUNCTIONALITY (Modal Routing) ---
+
+modalActionBtn.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    
+    // 1. Grab the exact service name from the modal
+    const requestedService = document.getElementById('modalTitle').innerText;
+    
+    // 2. Auto-fill the custom dropdown and hidden input
+    customSelectText.innerText = requestedService;
+    hiddenServiceInput.value = requestedService;
+    
+    // 3. Optional: Add it as a temporary active option if it doesn't exist in the hardcoded list
+    allOptions.forEach(opt => opt.classList.remove('active'));
+    
+    // 4. Trigger the visual pulse glow
+    targetGroup.classList.remove('pulse-glow'); 
+    void targetGroup.offsetWidth; 
+    targetGroup.classList.add('pulse-glow');
+    
+    // 5. Close modal
+    closeEliteModal();
+    
+    // 6. Smooth scroll to form mathematically
+    setTimeout(() => {
+        if(contactSection) {
+            const headerOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-clearance')) || 100;
+            const elementPosition = contactSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            
+            setTimeout(() => document.getElementById('name').focus(), 800);
+        }
+    }, 300);
+});
+
+/* ════════════════════════════════════════════════════════════
+   07. KINETIC PROCESS TRACK ENGINE (80% VIEWPORT TRIGGER)
+   Maps scroll percentage mathematically to device screen height.
+   ════════════════════════════════════════════════════════════ */
+const processTrack = document.getElementById('processTrack');
+const processLineFill = document.getElementById('processLineFill');
+const processSteps = document.querySelectorAll('.process-step');
+
+window.addEventListener('scroll', () => {
+    if(!processTrack) return;
+    
+    const trackRect = processTrack.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // THE 80% MATHEMATICAL THRESHOLD
+    const triggerPoint = windowHeight * 0.8;
+    
+    // 1. Draw the Laser Line
+    // Synced perfectly so the laser hits the node exactly at the 80% mark
+    let progress = (triggerPoint - trackRect.top) / trackRect.height;
+    progress = Math.max(0, Math.min(1, progress)); 
+    processLineFill.style.height = `${progress * 100}%`;
+    
+    // 2. Ignite the Nodes
+    // The circular card will erupt into its active state exactly when it crosses the 80% line
+    processSteps.forEach(step => {
+        const stepRect = step.getBoundingClientRect();
+        
+        if(stepRect.top < triggerPoint) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+}, {passive:true});
+/* ════════════════════════════════════════════════════════════
+   08. APEX RETURN ENGINE (BACK TO TOP)
+   ════════════════════════════════════════════════════════════ */
+const apexReturnBtn = document.getElementById('apexReturn');
+
+// Listen for scroll depth to reveal the button
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 800) { 
+        apexReturnBtn.classList.add('visible');
+    } else {
+        apexReturnBtn.classList.remove('visible');
+    }
+}, {passive: true});
+
+// Execute the smooth return sequence
+apexReturnBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+</script>
+</body>
+</html>
